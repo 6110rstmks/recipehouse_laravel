@@ -51,6 +51,7 @@ class AuthController extends Controller
 
             if (Auth::attempt($credentials))
             {
+                // session hijacking countermeasure
                 $request->session()->regenerate();
 
                 // ログインに成功したらエラーアカウントを0にする（次回のログイン時にまた使えるようにするため）

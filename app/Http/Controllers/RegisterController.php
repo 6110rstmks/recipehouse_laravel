@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
+use illuminate\Support\Facades\Auth;
 
 
 class RegisterController extends Controller
@@ -23,13 +24,21 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         User::create([
-            'username' => $request->name,
+            'username' => $request->username,
             'password' => Hash::make($request->password),
         ]);
 
-        
+        $credentials = $request->only('username', 'password');
 
-        return redirect('posts');
+        Log::debug($credentials);
+
+        if (Auth::attempt($credentials))
+        {
+
+            return redirect('posts');
+        }
+
+
     }
 
 
