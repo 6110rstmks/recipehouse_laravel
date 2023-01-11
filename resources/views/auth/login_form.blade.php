@@ -17,9 +17,9 @@
         </div>
     @endif
 
-    @if (session('logout'))
+    @if (session('logout_msg'))
         <div class="alert alert-success">
-            {{ session('logout') }}
+            {{ session('logout_msg') }}
         </div>
     @endif
 

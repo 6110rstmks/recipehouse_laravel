@@ -21,8 +21,22 @@ class RegisterController extends Controller
         return view('auth.registration_form');
     }
 
+    /**
+     * @param
+     */
     public function register(Request $request)
     {
+
+        if ($this->user->)
+
+        // check password and password_cnf is match
+        if ($request->password != $request->password_conf)
+        {
+            return back()->withErrors([
+                'match_error' => 'password is not matched.',
+            ]);
+        }
+
         User::create([
             'username' => $request->username,
             'password' => Hash::make($request->password),

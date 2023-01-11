@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Log;
+
+
+/**
+ *  user master data
+ * @property integer id
+ *
+ */
 
 class User extends Authenticatable
 {
@@ -32,20 +40,23 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function registerUser()
-    {
-        
-    }
-
     /**
      * マッチしたユーザを返す
      * return the user whose username match
      * @param string $username
-     * @return object
+     * @return object|false
      */
     public function getUser($username)
     {
-        return User::where('username', '=', $username)->first();
+        $a = User::where('username', '=', $username)->first();
+
+        Log::debug('getUser:' . $a);
+
+        if (is_null($a))
+        {
+            return false;
+        }
+        return $a;
     }
 
     /**

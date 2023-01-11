@@ -12,12 +12,16 @@ use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
+    public $user;
+
     public function __construct(User $user)
     {
         $this->user = $user;
     }
 
     /**
+     *
+     * @param void
      * @return View
      *
      */
@@ -27,7 +31,9 @@ class AuthController extends Controller
     }
 
     /**
-     * @param App\Http\Request\LoginFormRequest
+     *
+     * @param App\Http\Request\LoginFormRequest $request
+     * @return
      */
 
     public function login(LoginFormRequest $request)
@@ -35,12 +41,14 @@ class AuthController extends Controller
 
         $credentials = $request->only('username', 'password');
 
+        // ユーザの一レコードの値を取得。
         $user = $this->user->getUser($credentials['username']);
 
+        Log::debug($user);
 
-        if (!is_null($this->user))
+        // ユーザがあるかどうか
+        if ($user != false)
         {
-
             // アカウントがロックされたら弾く処理
             if ($this->user->isAccountLocked($user))
             {
@@ -63,6 +71,7 @@ class AuthController extends Controller
 
                 // recipehouseへ移動
                 return redirect('posts');
+                // return redirect()->route('posts.index');
             }
 
             // ログインに失敗したらエラーカウントを1増やす
@@ -86,9 +95,12 @@ class AuthController extends Controller
         return back()->withErrors([
             'login_error' => 'mail address or password is incorrect'
         ]);
-
     }
 
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \IlluminateHttp\Response
+     */
     public function logout(Request $request)
     {
         Auth::logout();
@@ -98,6 +110,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('showLogin')->with('logout', 'logout is done.');
+        return redirect()->route('showLogin')->with('logout_msg', 'logout is done.');
     }
 }
