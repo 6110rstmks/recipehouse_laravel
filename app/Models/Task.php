@@ -10,12 +10,11 @@ class Task extends Model
     use HasFactory;
 
     protected $fillable = [
-        'post_id',
         'body',
     ];
 
-    public function post()
+    public function posts()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsToMany(Post::class);
     }
 }

@@ -44,6 +44,9 @@
 
             <label for="inputPassword">Password</label>
             <input style="display: block" type="password" name="password" id="inputPassword" class="" placeholder="Password">
+
+            <input type="checkbox" name="remember_me" value="true">
+
             <button style="display: block" type="submit">Login in</button>
         </form>
     </div>

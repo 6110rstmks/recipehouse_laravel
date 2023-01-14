@@ -41,6 +41,12 @@ class AuthController extends Controller
 
         $credentials = $request->only('username', 'password');
 
+        // $remember_me = $request->input('remember_me');
+
+        $remember_me = $request->has('remember_me') ? true : false;
+        $type_re = gettype($remember_me);
+
+
         // ユーザの一レコードの値を取得。
         $user = $this->user->getUser($credentials['username']);
 
@@ -57,7 +63,7 @@ class AuthController extends Controller
                 ]);
             }
 
-            if (Auth::attempt($credentials))
+            if (Auth::attempt($credentials, $remember_me))
             {
                 // session hijacking countermeasure
                 $request->session()->regenerate();

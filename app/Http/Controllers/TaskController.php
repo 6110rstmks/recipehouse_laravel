@@ -9,7 +9,7 @@ use App\Models\Task;
 class TaskController extends Controller
 {
     /**
-     * 
+     *
      *
      */
     public function store(Request $request, Post $post)
@@ -19,9 +19,12 @@ class TaskController extends Controller
         ]);
 
         $task = new Task();
-        $task->post_id = $post->id;
+
         $task->body = $request->body;
+        
         $task->save();
+
+        $post->tasks()->syncWithoutDetaching($task->id);
 
         return redirect()
             ->route('posts.show', $post);

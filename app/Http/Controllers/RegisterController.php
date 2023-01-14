@@ -27,7 +27,8 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
 
-        if ($this->user->)
+        // すでに登録済みのユーザ名があるかどうか
+        // if ($this->user->)
 
         // check password and password_cnf is match
         if ($request->password != $request->password_conf)

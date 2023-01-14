@@ -13,11 +13,10 @@ class Post extends Model
         'title',
         'body',
         'pos',
-        'is_done',
     ];
 
     public function tasks()
     {
-        return $this->hasMany(Task::class);
+        return $this->belongsToMany(Task::class);
     }
 }
