@@ -57,15 +57,17 @@ class PostController extends Controller
     {
         $post->delete();
 
+        // そもそも非同期で作成してたからここはおきるはずなかった。
         return redirect()
             ->route('posts.index');
     }
 
     public function purge()
     {
-
+        // これが全削除ができるやつらしい
         DB::table('posts')->delete();
 
+        // そもそも非同期で作成してたからここはおきるはずなかった。
         return redirect()
             ->route('posts.index');
     }

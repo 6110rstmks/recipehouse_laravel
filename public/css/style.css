@@ -171,3 +171,12 @@ button {
     vertical-align: top;
     width: 20px;
 }
+
+.pagination {
+    display: flex;
+}
+
+.page-item {
+    list-style-type: none;
+    border: 1px black solid;
+}

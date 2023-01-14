@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TaskController;
-use App\Http\Controllers\LogController;
+// use App\Http\Controllers\LogController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Auth\AuthController;
 
@@ -15,6 +15,10 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])
 Route::post('/register', [RegisterController::class, 'register'])
     ->name('saveRegister');
 
+// task list page
+Route::get('/tasks/list', [TaskController::class, 'list'])
+    ->name('tasks.list');
+
 Route::group(['middleware' => ['guest']], function() {
 
 
@@ -23,6 +27,7 @@ Route::group(['middleware' => ['guest']], function() {
 
     Route::post('login', [AuthController::class, 'login'])
         ->name('login');
+
 });
 
 
@@ -72,8 +77,14 @@ Route::group(['middleware' => ['auth']], function() {
         ->where('post', '[0-9]+');
 
     Route::delete('/tasks/{task}/destroy', [TaskController::class, 'destroy'])
+    // Route::delete('/posts/{post}/{task}/destroy', [TaskController::class, 'destroy'])
+    // 上のコメントアウトしているやつでやろうとしたがうまくいかなくて断念
+    // dotinstallをみると/tasks/{task}/destroyでやっていた。
         ->name('tasks.destroy')
         ->where('task', '[0-9]+');
+
+
+
 });
 
 

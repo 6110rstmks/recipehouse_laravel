@@ -1,4 +1,6 @@
 
+{{-- this file reprezent left screen --}}
+
 <span class="button is-success purge-category" style="margin-top: 12px;">purge</span>
 <ul class="category_ul">
     @forelse ($posts as $post)

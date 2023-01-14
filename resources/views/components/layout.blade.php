@@ -6,8 +6,6 @@
     <title>recipe house</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ url('css/style.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 </head>
 <body>
     <div class="container" style="margin-top: 30px;">
@@ -19,7 +17,9 @@
                 <button>logout</button>
             </form>
 
-        <a href="{{ route('showRegister') }}"><button>user registeration is here</button></a>
+            <a href="{{ route('tasks.list') }}"><button>タスク一覧はここから</button></a>
+
+            <a href="{{ route('showRegister') }}"><button>user registeration is here</button></a>
 
             <li class="text-red-500">username: {{ Auth::user()->username }}</li>
             <div class="form-box">

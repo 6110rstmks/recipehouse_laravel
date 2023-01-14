@@ -9,7 +9,8 @@
 
 <body>
     <script src="{{ asset('js/app.js') }}"></script>
-    <a href="{{ route('showRegister') }}">user registration is here</a>
+    <a href="{{ route('showRegister') }}"><button>user registration is here</button></a>
+    <a href="{{ route('tasks.list') }}"><button>task list is here</button></a>
 
     @if (session('login_error'))
         <div class="alert alert-success" style="color: red">
