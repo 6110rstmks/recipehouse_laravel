@@ -44,7 +44,6 @@ class AuthController extends Controller
         // $remember_me = $request->input('remember_me');
 
         $remember_me = $request->has('remember_me') ? true : false;
-        $type_re = gettype($remember_me);
 
 
         // ユーザの一レコードの値を取得。

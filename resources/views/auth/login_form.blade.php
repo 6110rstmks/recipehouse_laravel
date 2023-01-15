@@ -5,12 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login form</title>
+    <link href={{ asset('css/app.css') }} rel="stylesheet">
 </head>
 
 <body>
     <script src="{{ asset('js/app.js') }}"></script>
     <a href="{{ route('showRegister') }}"><button>user registration is here</button></a>
-    <a href="{{ route('tasks.list') }}"><button>task list is here</button></a>
+    <a href="{{ route('recipes.list') }}"><button>task list is here</button></a>
 
     @if (session('login_error'))
         <div class="alert alert-success" style="color: red">
@@ -50,9 +51,9 @@
 
             <button style="display: block" type="submit">Login in</button>
         </form>
+
+        <a href="{{ route('password_reset') }}">パスワードリセットはこちら</a>
     </div>
 
-
-    <link href={{ asset('css/app.css') }} rel="stylesheet"></link>
 </body>
 </html>

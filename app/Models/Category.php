@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Task extends Model
+class Category extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'title',
         'body',
+        'pos',
     ];
 
-    public function posts()
+    public function tasks()
     {
-        return $this->belongsToMany(Post::class);
+        return $this->belongsToMany(Recipe::class);
     }
 }

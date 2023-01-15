@@ -11,13 +11,13 @@
     <div class="container" style="margin-top: 30px;">
 
         <div class="left-container">
-        <h1 class="text-3xl font-bold underline">Hello world!</h1>
+        <h1 class="text-3xl font-bold underline"></h1>
             <form action="{{ route('logout') }}" method="POST">
             @csrf
                 <button>logout</button>
             </form>
 
-            <a href="{{ route('tasks.list') }}"><button>タスク一覧はここから</button></a>
+            <a href="{{ route('recipes.list') }}"><button>タスク一覧はここから</button></a>
 
             <a href="{{ route('showRegister') }}"><button>user registeration is here</button></a>
 

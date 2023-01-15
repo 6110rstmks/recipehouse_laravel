@@ -11,6 +11,8 @@ use illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
+    private $user;
+    
     public function __construct(User $user)
     {
         $this->user = $user;
@@ -23,11 +25,12 @@ class RegisterController extends Controller
 
     /**
      * @param
+     * @return void
      */
     public function register(Request $request)
     {
 
-        // すでに登録済みのユーザ名があるかどうか
+        // すでに登録済みのユーザ名があるかどうかというのはいらない,schema builderでunique()をつかっているため
         // if ($this->user->)
 
         // check password and password_cnf is match
@@ -40,16 +43,15 @@ class RegisterController extends Controller
 
         User::create([
             'username' => $request->username,
+            'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
         $credentials = $request->only('username', 'password');
 
-        Log::debug($credentials);
 
         if (Auth::attempt($credentials))
         {
-
             return redirect('posts');
         }
 

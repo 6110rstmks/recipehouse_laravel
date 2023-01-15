@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\TaskController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RecipeController;
 // use App\Http\Controllers\LogController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\Auth\AuthController;
 
 // Auth process
@@ -15,9 +16,9 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])
 Route::post('/register', [RegisterController::class, 'register'])
     ->name('saveRegister');
 
-// task list page
-Route::get('/tasks/list', [TaskController::class, 'list'])
-    ->name('tasks.list');
+// recipe list page
+Route::get('/recipes/list', [RecipeController::class, 'list'])
+    ->name('recipes.list');
 
 Route::group(['middleware' => ['guest']], function() {
 
@@ -28,7 +29,14 @@ Route::group(['middleware' => ['guest']], function() {
     Route::post('login', [AuthController::class, 'login'])
         ->name('login');
 
+    Route::get('/password-reset', [PasswordController::class, 'resetPasswordPage'])
+        ->name('password_reset');
+
+    Route::post('/password-reset-email-send', [PasswordController::class, 'emailSend'])
+        ->name('password-reset.email.send');
+
 });
+
 
 
 Route::group(['middleware' => ['auth']], function() {
@@ -39,49 +47,50 @@ Route::group(['middleware' => ['auth']], function() {
         ->name('logout');
 
 
-    Route::get('/posts', [PostController::class, 'index'])
-        ->name('posts.index');
+    Route::get('/categories', [CategoryController::class, 'index'])
+        ->name('categories.index');
 
-    Route::get('/posts/{post}', [PostController::class, 'show'])
-        ->name('posts.show')
-        ->where('post', '[0-9]+');
+    Route::get('/categories/{recipe}', [CategoryController::class, 'show'])
+        ->name('categories.show')
+        ->where('category', '[0-9]+');
 
-    Route::post('/posts/store', [PostController::class, 'store'])
-        ->name('posts.store');
+    Route::post('/categories/store', [CategoryController::class, 'store'])
+        ->name('categories.store');
 
-    Route::patch('/posts/{post}/update', [PostController::class, 'update'])
-        ->name('posts.update')
-        ->where('post', '[0-9]+');
+    Route::patch('/categories/{recipe}/update', [CategoryController::class, 'update'])
+        ->name('categories.update')
+        ->where('category', '[0-9]+');
 
-    Route::delete('/posts/{post}/destroy', [PostController::class, 'destroy'])
-        ->name('posts.destroy')
-        ->where('post', '[0-9]+');
+    Route::delete('/categories/{recipe}/destroy', [CategoryController::class, 'destroy'])
+        ->name('categories.destroy')
+        ->where('category', '[0-9]+');
 
-    Route::patch('/posts/{post}/checked', [PostController::class, 'checked'])
-        ->name('posts.checked')
-        ->where('post', '[0-9]+');
+    Route::patch('/categories/{recipe}/checked', [CategoryController::class, 'checked'])
+        ->name('categories.checked')
+        ->where('category', '[0-9]+');
 
-    Route::delete('/posts/purge', [PostController::class, 'purge'])
-        ->name('posts.purge');
+    Route::delete('/categories/purge', [CategoryController::class, 'purge'])
+        ->name('categories.purge');
 
-    Route::patch('/posts/{post}/upto', [PostController::class, 'upto'])
-        ->name('posts.upto')
-        ->where('post', '[0-9]+');
+    Route::patch('/categories/{recipe}/upto', [CategoryController::class, 'upto'])
+        ->name('categories.upto')
+        ->where('category', '[0-9]+');
 
-    Route::patch('/posts/{post}/downto', [PostController::class, 'downto'])
-        ->name('posts.downto')
-        ->where('post', '[0-9]+');
+    Route::patch('/categories/{recipe}/downto', [CategoryController::class, 'downto'])
+        ->name('categories.downto')
+        ->where('category', '[0-9]+');
 
-    Route::post('/posts/{post}/tasks', [TaskController::class, 'store'])
-        ->name('tasks.store')
-        ->where('post', '[0-9]+');
+    // postに紐付けたタスクを追加
+    Route::post('/categories/{recipe}/recipes', [RecipeController::class, 'store'])
+        ->name('recipes.store')
+        ->where('category', '[0-9]+');
 
-    Route::delete('/tasks/{task}/destroy', [TaskController::class, 'destroy'])
-    // Route::delete('/posts/{post}/{task}/destroy', [TaskController::class, 'destroy'])
+    Route::delete('/recipes/{recipe}/destroy', [RecipeController::class, 'destroy'])
+    // Route::delete('/categories/{recipe}/{recipe}/destroy', [RecipeController::class, 'destroy'])
     // 上のコメントアウトしているやつでやろうとしたがうまくいかなくて断念
-    // dotinstallをみると/tasks/{task}/destroyでやっていた。
-        ->name('tasks.destroy')
-        ->where('task', '[0-9]+');
+    // dotinstallをみると/recipes/{recipe}/destroyでやっていた。
+        ->name('recipes.destroy')
+        ->where('recipe', '[0-9]+');
 
 
 

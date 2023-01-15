@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\Task;
+use App\Models\Category;
+use App\Models\Recipe;
 use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
@@ -13,7 +13,7 @@ class TaskController extends Controller
     public function list()
     {
         // $tasks = Task::latest()->get();
-        $tasks = Task::paginate(2);
+        $tasks = Recipe::paginate(2);
 
         return view('task')
             ->with(['tasks' => $tasks]);
@@ -22,7 +22,7 @@ class TaskController extends Controller
     /**
      * save a task and sync it with a post
      */
-    public function store(Request $request, Post $post)
+    public function store(Request $request, Category $category)
     {
         // countermeasure for multiple submission
 
@@ -32,7 +32,7 @@ class TaskController extends Controller
             'body' => 'required',
         ]);
 
-        $task = new Task();
+        $task = new Recipe();
 
         $task->body = $request->body;
 
@@ -41,25 +41,25 @@ class TaskController extends Controller
         // https://laravel.com/docs/9.x/eloquent-relationships#inserting-and-updating-related-models
         // 変わりにこれを使うのもよさげ
 
-        $post->tasks()->syncWithoutDetaching($task->id);
+        $category->tasks()->syncWithoutDetaching($task->id);
 
         return redirect()
-            ->route('posts.show', $post);
+            ->route('posts.show', $category);
     }
 
     /**
      *
      */
-    public function destroy(Task $task)
+    public function destroy(Recipe $recipe)
     {
 
         // $task->postsをデバッグを使用してなんとかidをrouteに渡せたけども
         // これは正規のやり方ではないはず。
         //　正しいやり方はまた後で調べます。
 
-        $aaa = $task->posts[0]->id;
+        $aaa = $recipe->posts[0]->id;
 
-        $task->delete();
+        $recipe->delete();
 
         Log::debug($aaa);
 

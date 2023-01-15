@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use App\Models\Post;
+use App\Models\Category;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -14,48 +14,48 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::latest()->get();
+        $posts = Category::latest()->get();
 
         return view('index')
             ->with(['posts' => $posts]);
     }
 
-    public function show(Post $post)
+    public function show(Category $category)
     {
-        // $posts = Post::orderby('pos', 'desc')->get();
+        // $posts = Category::orderby('pos', 'desc')->get();
 
-        $posts = Post::latest()->get();
+        $posts = Category::latest()->get();
 
         return view('posts.show')
             ->with([
-                'post' => $post,
+                'category' => $category,
                 'posts' => $posts,
             ]);
     }
 
     public function store(PostRequest $request)
     {
-        $post = new Post();
+        $category = new Category();
 
         Log::debug('aa');
 
-        $post->title = $request->title;
+        $category->title = $request->title;
 
-        $post->save();
+        $category->save();
 
-        return response()->json(['id' => Post::max('id')]);
+        return response()->json(['id' => Category::max('id')]);
 
     }
 
-    public function update(PostRequest $request, Post $post)
+    public function update(PostRequest $request, Category $category)
     {
-        $post->title = $request->title;
-        $post->save();
+        $category->title = $request->title;
+        $category->save();
     }
 
-    public function destroy(Post $post)
+    public function destroy(Category $category)
     {
-        $post->delete();
+        $category->delete();
 
         // そもそも非同期で作成してたからここはおきるはずなかった。
         return redirect()

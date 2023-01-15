@@ -4,7 +4,7 @@
 
     @auth
     <p style="display: inline">You are certificated.</p>
-    <a href="{{ route('posts.index')}}"><button>Go to home</button></a>
+    <a href="{{ route('categories.index')}}"><button>Go to home</button></a>
 
     @endauth
 
@@ -14,8 +14,12 @@
 
     <form method="POST" action="{{ route('saveRegister') }}">
         @csrf
+
+
+
         <div class="form-group row">
             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+
 
             <div class="col-md-6">
                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="username" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -27,6 +31,12 @@
                 @enderror
             </div>
         </div>
+
+        <div>
+            <div>email</div>
+            <input type="email" name="email" id="">
+        </div>
+
 
         <div class="form-group row">
             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

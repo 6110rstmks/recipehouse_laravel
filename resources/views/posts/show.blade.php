@@ -6,18 +6,18 @@
         <!-- 画面右側 -->
     <!-- if there are any categories ,below html is rendered. -->
     {{-- if thre is no categories, right screen display nothing. --}}
-    <h1>*List*  {{ $post->title }}</h1>
+    <h1>*List*  {{ $category->title }}</h1>
 
-    <form method="post" action="{{ route('tasks.store', $post) }}" class="task-form">
+    <form method="post" action="{{ route('recipes.store', $category) }}" class="task-form">
         @csrf
         <p>add recipe</p>
         <input type="text" name="body">
     </form>
     <ul>
-        @foreach ($post->tasks as $task)
+        @foreach ($category->recipes as $recipe)
             <li>
-                {{ $task->body }}
-                <form method="post" action="{{ route('tasks.destroy', $post, $task) }}" class="delete-comment">
+                {{ $recipe->body }}
+                <form method="post" action="{{ route('recipes.destroy', $category, $recipe) }}" class="delete-comment">
                     @method('DELETE')
                     @csrf
                     <button class="btn">削除</button>

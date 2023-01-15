@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="{{ url('css/style.css') }}">
 
+{{-- pagerが二ページ分あるときに表示させる。 --}}
 @if ($paginator->lastPage() > 1)
 <ul class="pagination">
     <li class="page-item {{ ($paginator->currentPage() == 1) ? ' disabled' : '' }}">
