@@ -44,38 +44,38 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/categories', [CategoryController::class, 'index'])
         ->name('categories.index');
 
-    Route::get('/categories/{recipe}', [CategoryController::class, 'show'])
+    Route::get('/categories/{category}', [CategoryController::class, 'show'])
         ->name('categories.show')
         ->where('category', '[0-9]+');
 
     Route::post('/categories/store', [CategoryController::class, 'store'])
         ->name('categories.store');
 
-    Route::patch('/categories/{recipe}/update', [CategoryController::class, 'update'])
+    Route::patch('/categories/{category}/update', [CategoryController::class, 'update'])
         ->name('categories.update')
         ->where('category', '[0-9]+');
 
-    Route::delete('/categories/{recipe}/destroy', [CategoryController::class, 'destroy'])
+    Route::delete('/categories/{category}/destroy', [CategoryController::class, 'destroy'])
         ->name('categories.destroy')
         ->where('category', '[0-9]+');
 
-    Route::patch('/categories/{recipe}/checked', [CategoryController::class, 'checked'])
+    Route::patch('/categories/{category}/checked', [CategoryController::class, 'checked'])
         ->name('categories.checked')
         ->where('category', '[0-9]+');
 
     Route::delete('/categories/purge', [CategoryController::class, 'purge'])
         ->name('categories.purge');
 
-    Route::patch('/categories/{recipe}/upto', [CategoryController::class, 'upto'])
+    Route::patch('/categories/{category}/upto', [CategoryController::class, 'upto'])
         ->name('categories.upto')
         ->where('category', '[0-9]+');
 
-    Route::patch('/categories/{recipe}/downto', [CategoryController::class, 'downto'])
+    Route::patch('/categories/{category}/downto', [CategoryController::class, 'downto'])
         ->name('categories.downto')
         ->where('category', '[0-9]+');
 
-    // postに紐付けたタスクを追加
-    Route::post('/categories/{recipe}/recipes', [RecipeController::class, 'store'])
+    // categoryに紐付けたrecipeを追加
+    Route::post('/categories/{category}/recipes', [RecipeController::class, 'store'])
         ->name('recipes.store')
         ->where('category', '[0-9]+');
 
@@ -85,8 +85,6 @@ Route::group(['middleware' => ['auth']], function() {
     // dotinstallをみると/recipes/{recipe}/destroyでやっていた。
         ->name('recipes.destroy')
         ->where('recipe', '[0-9]+');
-
-
 
 });
 

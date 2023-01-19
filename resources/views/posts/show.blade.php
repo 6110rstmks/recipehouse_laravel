@@ -1,6 +1,7 @@
 <x-layout>
     <x-slot name="left">
-        <x-leftside :posts="$posts" />
+        {{-- <x-leftside :posts="$posts" /> --}}
+        <x-leftside :categories="$categories" />
     </x-slot>
 
         <!-- 画面右側 -->
@@ -9,6 +10,7 @@
     <h1>*List*  {{ $category->title }}</h1>
 
     <form method="post" action="{{ route('recipes.store', $category) }}" class="task-form">
+    {{-- <form method="post" action="{{ route('recipes.store', $recipe) }}" class="task-form"> --}}
         @csrf
         <p>add recipe</p>
         <input type="text" name="body">

@@ -1,5 +1,5 @@
 
-{{-- this file reprezent left screen --}}
+{{-- this file reprezent the left screen --}}
 
 <span class="button is-success purge-category" style="margin-top: 12px;">purge</span>
 <ul class="category_ul">

@@ -16,10 +16,10 @@ return new class extends Migration
     {
         Schema::create('category_recipe_user', function (Blueprint $table) {
             // $table->bigIncrements('id');
-            $table->primary(['user_id', 'category_id', 'recipe_id']);
+            $table->primary(['user_id', 'category_id']);
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('category_id')->unsigned();
-            $table->bigInteger('recipe_id')->unsigned();
+            $table->bigInteger('recipe_id')->unsigned()->nullable();
 
             // $table->foreign('user_id', 'pivotTable_userId')->references('id')->on('users')->onDelete('cascade');
             // $table->foreign('category_id', 'pivotTable_categoryId')->references('id')->on('categories')->onDelete('cascade');
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_recipe');
+        Schema::dropIfExists('category_recipe_user');
     }
 };

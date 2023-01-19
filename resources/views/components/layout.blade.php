@@ -17,23 +17,28 @@
                 <button>logout</button>
             </form>
 
-            <a href="{{ route('recipes.list') }}"><button>タスク一覧はここから</button></a>
+            <a href="{{ route('recipes.list') }}"><button>recipe一覧はここから</button></a>
 
             <a href="{{ route('showRegister') }}"><button>user registeration is here</button></a>
 
             <li class="text-red-500">username: {{ Auth::user()->username }}</li>
             <div class="form-box">
                 <h4 style="margin-bottom: 20px; margin-top: 10px">RECIPE HOUSE</h4>
-                <form method="post" class="add-form">
+                {{-- <form method="post" class="add-form">
                     <p class="control has-icons-left has-icons-right">
                             <input class="input title-input" type="text" name="title" placeholder="enter category name">
-                            {{-- @error('title')
-                            <div class="error">{{ $message }}</div>
-                            @enderror --}}
+
                             <span class="icon is-small is-left">
                                 <i class="fas fa-utensils"></i>
                             </span>
                     </p>
+                </form> --}}
+                <form method="POST" action="{{ route('categories.store') }}">
+                    @csrf
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-utensils"></i>
+                    </span>
+                    <input type="text" name="title" placeholder="entry category name">
                 </form>
 
             </div>

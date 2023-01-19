@@ -44,7 +44,8 @@ purgeCategory.addEventListener('click', () => {
     if (!confirm('Are you sure?')) {
         return;
     }
-    fetch('/posts/purge', {
+
+    fetch('/categories/purge', {
         method: 'DELETE',
         headers: {
             'X-CSRF-Token': token,
@@ -62,9 +63,12 @@ purgeCategory.addEventListener('click', () => {
 
 deletes.forEach(span => {
     const postid = span.dataset.id;
+
+    console.log(postid)
+
     span.addEventListener('click', () => {
 
-        fetch('/posts/'+ postid + '/destroy', {
+        fetch('/categories/'+ postid + '/destroy', {
             method: 'DELETE',
             headers: {
                 'X-CSRF-Token': token,
@@ -86,9 +90,11 @@ deletes.forEach(span => {
 document.querySelector('.add-form').addEventListener('submit', e => {
     e.preventDefault();
 
-    const title = addTitle.value;
+    const title = addTitle.value
 
-    fetch('/posts/store', {
+    console.log(title)
+
+    fetch('/categories/store', {
       method: 'POST',
       headers: {
         'X-CSRF-Token': token,
@@ -117,7 +123,7 @@ updateTitles.forEach(updateTitle => {
         if (e.keyCode === 13) {
             const title = updateTitle.value;
 
-            fetch('/posts/' + postid + '/update', {
+            fetch('/categories/' + postid + '/update', {
                 method: 'PATCH',
                 headers: {
                     'X-CSRF-Token': token,
@@ -135,7 +141,7 @@ updateTitles.forEach(updateTitle => {
         updateTitle.style.cursor = 'context-menu';
         const title = updateTitle.value;
 
-        fetch('/posts/' + postid + '/update', {
+        fetch('/categories/' + postid + '/update', {
             method: 'PATCH',
             headers: {
                 'X-CSRF-Token': token,

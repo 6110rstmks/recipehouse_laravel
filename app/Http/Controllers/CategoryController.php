@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\User;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -23,17 +25,20 @@ class CategoryController extends Controller
     {
         // $posts = Category::orderby('pos', 'desc')->get();
 
-        $posts = Category::latest()->get();
+        $categories = Category::latest()->get();
 
         return view('posts.show')
             ->with([
                 'category' => $category,
-                'posts' => $posts,
+                'categories' => $categories,
             ]);
     }
 
     public function store(CategoryRequest $request)
     {
+        $authed_user = Auth::user();
+        // $authed_user = User::find(1);
+
         $category = new Category();
 
         // Log::debug('aa');
@@ -42,7 +47,14 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return response()->json(['id' => Category::max('id')]);
+        Log::debug($authed_user);
+
+        // categories()にエラーがでてるけどちゃんとうまくいってる。
+        $authed_user->categories()->attach($category->id, ['recipe_id' => null]);
+
+        return redirect()->route('categories.index');
+
+        // return response()->json(['id' => Category::max('id')]);
 
     }
 
