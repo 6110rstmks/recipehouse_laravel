@@ -15,8 +15,13 @@ class Category extends Model
         'pos',
     ];
 
-    public function tasks()
+    public function recipes()
     {
-        return $this->belongsToMany(Recipe::class);
+        return $this->belongsToMany(Recipe::class, 'category_recipe_user');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'category_recipe_user');
     }
 }

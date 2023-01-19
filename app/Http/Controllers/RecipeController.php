@@ -7,20 +7,20 @@ use App\Models\Category;
 use App\Models\Recipe;
 use Illuminate\Support\Facades\Log;
 
-class TaskController extends Controller
+class RecipeController extends Controller
 {
 
     public function list()
     {
-        // $tasks = Task::latest()->get();
-        $tasks = Recipe::paginate(2);
+        // $recipes = Task::latest()->get();
+        $recipes = Recipe::paginate(2);
 
-        return view('task')
-            ->with(['tasks' => $tasks]);
+        return view('recipe')
+            ->with(['recipes' => $recipes]);
     }
 
     /**
-     * save a task and sync it with a post
+     * save a recipe and sync it with a post
      */
     public function store(Request $request, Category $category)
     {
@@ -32,16 +32,16 @@ class TaskController extends Controller
             'body' => 'required',
         ]);
 
-        $task = new Recipe();
+        $recipe = new Recipe();
 
-        $task->body = $request->body;
+        $recipe->body = $request->body;
 
-        $task->save();
+        $recipe->save();
 
         // https://laravel.com/docs/9.x/eloquent-relationships#inserting-and-updating-related-models
         // 変わりにこれを使うのもよさげ
 
-        $category->tasks()->syncWithoutDetaching($task->id);
+        $category->recipes()->syncWithoutDetaching($recipe->id);
 
         return redirect()
             ->route('posts.show', $category);
@@ -53,7 +53,7 @@ class TaskController extends Controller
     public function destroy(Recipe $recipe)
     {
 
-        // $task->postsをデバッグを使用してなんとかidをrouteに渡せたけども
+        // $recipe->postsをデバッグを使用してなんとかidをrouteに渡せたけども
         // これは正規のやり方ではないはず。
         //　正しいやり方はまた後で調べます。
 

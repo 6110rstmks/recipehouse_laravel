@@ -12,7 +12,7 @@ use illuminate\Support\Facades\Auth;
 class RegisterController extends Controller
 {
     private $user;
-    
+
     public function __construct(User $user)
     {
         $this->user = $user;
@@ -52,7 +52,7 @@ class RegisterController extends Controller
 
         if (Auth::attempt($credentials))
         {
-            return redirect('posts');
+            return redirect('categories');
         }
 
 

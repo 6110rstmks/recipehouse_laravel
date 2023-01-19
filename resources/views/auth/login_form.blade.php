@@ -11,7 +11,7 @@
 <body>
     <script src="{{ asset('js/app.js') }}"></script>
     <a href="{{ route('showRegister') }}"><button>user registration is here</button></a>
-    <a href="{{ route('recipes.list') }}"><button>task list is here</button></a>
+    <a href="{{ route('recipes.list') }}"><button>recipe list is here</button></a>
 
     @if (session('login_error'))
         <div class="alert alert-success" style="color: red">
@@ -52,7 +52,8 @@
             <button style="display: block" type="submit">Login in</button>
         </form>
 
-        <a href="{{ route('password_reset') }}">パスワードリセットはこちら</a>
+        <a href="{{ route('password_reset.email.form') }}">パスワードをお忘れの方</a>
+
     </div>
 
 </body>

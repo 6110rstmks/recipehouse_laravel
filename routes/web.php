@@ -29,12 +29,6 @@ Route::group(['middleware' => ['guest']], function() {
     Route::post('login', [AuthController::class, 'login'])
         ->name('login');
 
-    Route::get('/password-reset', [PasswordController::class, 'resetPasswordPage'])
-        ->name('password_reset');
-
-    Route::post('/password-reset-email-send', [PasswordController::class, 'emailSend'])
-        ->name('password-reset.email.send');
-
 });
 
 
@@ -94,6 +88,24 @@ Route::group(['middleware' => ['auth']], function() {
 
 
 
+});
+
+// パスワードリセット関連
+Route::prefix('password_reset')->name('password_reset.')->group(function () {
+    Route::prefix('email')->name('email.')->group(function () {
+        // パスワードリセットメール送信フォームページ
+        Route::get('/', [PasswordController::class, 'emailFormResetPassword'])->name('form');
+        // メール送信処理
+        Route::post('/', [PasswordController::class, 'sendEmailResetPassword'])->name('send');
+        // メール送信完了ページ
+        Route::get('/send_complete', [PasswordController::class, 'sendComplete'])->name('send_complete');
+    });
+    // パスワード再設定ページ
+    Route::get('/edit', [PasswordController::class, 'edit'])->name('edit');
+    // パスワード更新処理
+    Route::post('/update', [PasswordController::class, 'update'])->name('update');
+    // パスワード更新終了ページ
+    Route::get('/edited', [PasswordController::class, 'edited'])->name('edited');
 });
 
 

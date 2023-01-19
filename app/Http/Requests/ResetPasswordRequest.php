@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\TokenExpirationTimeRule;
 
-class SendEmailRequest extends FormRequest
+class ResetPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +25,9 @@ class SendEmailRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email:filter|exists:users,email'
+            'password' => ['required', 'regex:/^[0-9a-zA-z-_]{8,32}$/', 'confirmed'],
+            'password_confirmation' => ['required', 'same:password'],
+            'reset_token' => ['required', new TokenExpirationTimeRule],
         ];
     }
 
@@ -35,9 +38,9 @@ class SendEmailRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => ':attributeを入力してください',
-            'email.email' => '正しいメールアドレスの形式で入力してください',
-            'email.exists' => '登録している:attributeを入力してください'
+            'password.required' => ':attributeを入力してください',
+            'password.regex' => ':attributeは半角英数字とハイフンとアンダーバーのみで8文字以上32文字以内で入力してください',
+            'password.confirmed' => ':attributeが再入力欄と一致していません',
         ];
     }
 
@@ -48,7 +51,7 @@ class SendEmailRequest extends FormRequest
     public function attributes()
     {
         return [
-            'email' => 'メールアドレス',
+            'password' => 'パスワード',
         ];
     }
 }

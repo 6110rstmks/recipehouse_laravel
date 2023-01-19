@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Models\Category;
-use App\Http\Requests\PostRequest;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class PostController extends Controller
+class CategoryController extends Controller
 {
 
     public function index()
     {
-        $posts = Category::latest()->get();
+        $categories = Category::latest()->get();
 
         return view('index')
-            ->with(['posts' => $posts]);
+            ->with(['categories' => $categories]);
     }
 
     public function show(Category $category)
@@ -33,11 +32,11 @@ class PostController extends Controller
             ]);
     }
 
-    public function store(PostRequest $request)
+    public function store(CategoryRequest $request)
     {
         $category = new Category();
 
-        Log::debug('aa');
+        // Log::debug('aa');
 
         $category->title = $request->title;
 
@@ -47,7 +46,7 @@ class PostController extends Controller
 
     }
 
-    public function update(PostRequest $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
         $category->title = $request->title;
         $category->save();
@@ -59,16 +58,16 @@ class PostController extends Controller
 
         // そもそも非同期で作成してたからここはおきるはずなかった。
         return redirect()
-            ->route('posts.index');
+            ->route('categories.index');
     }
 
     public function purge()
     {
         // これが全削除ができるやつらしい
-        DB::table('posts')->delete();
+        DB::table('categories')->delete();
 
         // そもそも非同期で作成してたからここはおきるはずなかった。
         return redirect()
-            ->route('posts.index');
+            ->route('categories.index');
     }
 }

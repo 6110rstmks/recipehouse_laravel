@@ -17,8 +17,6 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->string('token')->unique()->comment('トークン');
-            $table->dateTime('expire_at')->nullable()->comment('トークンの有効期限');
             $table->string('password');
             $table->tinyInteger('locked_flg')->default(0);
             $table->integer('error_count')->unsigned()->default(0);

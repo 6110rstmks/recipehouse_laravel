@@ -32,6 +32,16 @@ class User extends Authenticatable
         'error_count',
     ];
 
+    public function recipes()
+    {
+        return $this->belongsToMany(Recipe::class, 'category_recipe_user');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_recipe_user');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
