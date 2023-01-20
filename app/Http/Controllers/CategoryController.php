@@ -21,9 +21,11 @@ class CategoryController extends Controller
             ->with(['categories' => $categories]);
     }
 
+    /**
+     *
+     */
     public function show(Category $category)
     {
-        // $posts = Category::orderby('pos', 'desc')->get();
 
         $categories = Category::latest()->get();
 
@@ -37,19 +39,14 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $authed_user = Auth::user();
-        // $authed_user = User::find(1);
 
         $category = new Category();
-
-        // Log::debug('aa');
 
         $category->title = $request->title;
 
         $category->save();
 
-        Log::debug($authed_user);
-
-        // categories()にエラーがでてるけどちゃんとうまくいってる。
+        // categories()にエラーがでてるけどちゃんとうまくpivot tableに格納されてる。
         $authed_user->categories()->attach($category->id, ['recipe_id' => null]);
 
         return redirect()->route('categories.index');
@@ -58,6 +55,9 @@ class CategoryController extends Controller
 
     }
 
+    /**
+     * ajaxで実装できるはず。recipe一覧も非同期で実装する
+     */
     public function update(CategoryRequest $request, Category $category)
     {
         $category->title = $request->title;
@@ -66,6 +66,8 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        $authed_user = Auth::user();
+        $authed_user->categories()->detach($category->id);
         $category->delete();
 
         // そもそも非同期で作成してたからここはおきるはずなかった。

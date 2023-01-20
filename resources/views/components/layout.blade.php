@@ -17,6 +17,8 @@
                 <button>logout</button>
             </form>
 
+            <button>退会はこちら（未実装）</button>
+
             <a href="{{ route('recipes.list') }}"><button>recipe一覧はここから</button></a>
 
             <a href="{{ route('showRegister') }}"><button>user registeration is here</button></a>
@@ -38,7 +40,7 @@
                     <span class="icon is-small is-left">
                         <i class="fas fa-utensils"></i>
                     </span>
-                    <input type="text" name="title" placeholder="entry category name">
+                    <input type="text" class="title-input" name="title" placeholder="entry category name">
                 </form>
 
             </div>

@@ -75,7 +75,7 @@ class AuthController extends Controller
                 }
 
                 // recipehouseへ移動
-                return redirect('posts');
+                return redirect('categories');
                 // return redirect()->route('posts.index');
             }
 

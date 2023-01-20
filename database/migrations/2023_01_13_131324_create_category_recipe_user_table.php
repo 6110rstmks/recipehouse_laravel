@@ -21,8 +21,8 @@ return new class extends Migration
             $table->bigInteger('category_id')->unsigned();
             $table->bigInteger('recipe_id')->unsigned()->nullable();
 
-            // $table->foreign('user_id', 'pivotTable_userId')->references('id')->on('users')->onDelete('cascade');
-            // $table->foreign('category_id', 'pivotTable_categoryId')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('user_id', 'pivotTable_userId')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('category_id', 'pivotTable_categoryId')->references('id')->on('categories')->onDelete('cascade');
             // $table->foreign('recipe_id', 'pivotTable_recipeId')->references('id')->on('recipes')->onDelete('cascade');
         });
     }

@@ -45,18 +45,19 @@ purgeCategory.addEventListener('click', () => {
         return;
     }
 
-    fetch('/categories/purge', {
-        method: 'DELETE',
-        headers: {
-            'X-CSRF-Token': token,
-        }
-    })
+//     fetch('/categories/purge', {
+//         method: 'DELETE',
+//         headers: {
+//             'X-CSRF-Token': token,
+//         }
+//     })
 
-    const lis = document.querySelectorAll('li');
-    lis.forEach(li => {
-        li.remove();
-    });
-    ul.insertBefore(noLi, ul.firstChild);
+//     const lis = document.querySelectorAll('li');
+//     lis.forEach(li => {
+//         li.remove();
+//     });
+//     ul.insertBefore(noLi, ul.firstChild);
+
 })
 
 /*ajax delete*/
@@ -87,32 +88,32 @@ deletes.forEach(span => {
 
 /** ajax add category */
 
-document.querySelector('.add-form').addEventListener('submit', e => {
-    e.preventDefault();
+// document.querySelector('.add-form').addEventListener('submit', e => {
+//     e.preventDefault();
 
-    const title = addTitle.value
+//     const title = addTitle.value
 
-    console.log(title)
+//     console.log(title)
 
-    fetch('/categories/store', {
-      method: 'POST',
-      headers: {
-        'X-CSRF-Token': token,
-      },
-      body: new URLSearchParams({
-        title: title,
-      }),
-    })
+//     fetch('/categories/store', {
+//       method: 'POST',
+//       headers: {
+//         'X-CSRF-Token': token,
+//       },
+//       body: new URLSearchParams({
+//         title: title,
+//       }),
+//     })
 
-    .then(response => response.json())
+//     .then(response => response.json())
 
-    .then(json => {
-      addTodo(json.id, title);
-    });
+//     .then(json => {
+//       addTodo(json.id, title);
+//     });
 
-    addTitle.value = '';
-    addTitle.focus();
-})
+//     addTitle.value = '';
+//     addTitle.focus();
+// })
 
 /* ajax update category_name */
 
@@ -137,7 +138,6 @@ updateTitles.forEach(updateTitle => {
     })
 
     updateTitle.addEventListener('blur', () => {
-        console.log('conmp');
         updateTitle.style.cursor = 'context-menu';
         const title = updateTitle.value;
 
