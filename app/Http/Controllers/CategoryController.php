@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Models\User;
-use App\Http\Requests\CategoryRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use illuminate\Support\Facades\Auth;
@@ -15,7 +15,10 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::latest()->get();
+        $authenticated_user = Auth::user();
+
+        $categories = $authenticated_user->categories;
+        // $categories = Category::latest()->get();
 
         return view('index')
             ->with(['categories' => $categories]);
@@ -26,8 +29,11 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
+        $authenticated_user = Auth::user();
 
-        $categories = Category::latest()->get();
+
+        $categories = $authenticated_user->categories;
+
 
         return view('posts.show')
             ->with([
@@ -38,7 +44,7 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request)
     {
-        $authed_user = Auth::user();
+        $authenticated_user = Auth::user();
 
         $category = new Category();
 
@@ -47,7 +53,8 @@ class CategoryController extends Controller
         $category->save();
 
         // categories()にエラーがでてるけどちゃんとうまくpivot tableに格納されてる。
-        $authed_user->categories()->attach($category->id, ['recipe_id' => null]);
+        // $authed_user->categories()->attach($category->id, ['recipe_id' => null]);
+        $authenticated_user->categories()->syncWithoutDetaching($category->id);
 
         return redirect()->route('categories.index');
 

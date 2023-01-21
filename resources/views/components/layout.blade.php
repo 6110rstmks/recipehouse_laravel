@@ -26,22 +26,20 @@
             <li class="text-red-500">username: {{ Auth::user()->username }}</li>
             <div class="form-box">
                 <h4 style="margin-bottom: 20px; margin-top: 10px">RECIPE HOUSE</h4>
-                {{-- <form method="post" class="add-form">
-                    <p class="control has-icons-left has-icons-right">
-                            <input class="input title-input" type="text" name="title" placeholder="enter category name">
 
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-utensils"></i>
-                            </span>
-                    </p>
-                </form> --}}
+                {{-- add form --}}
                 <form method="POST" action="{{ route('categories.store') }}">
                     @csrf
                     <span class="icon is-small is-left">
                         <i class="fas fa-utensils"></i>
                     </span>
-                    <input type="text" class="title-input" name="title" placeholder="entry category name">
+                    <input type="text" class="title-input" name="title" placeholder="entry category name" value="{{ old('title') }}">
+                    <button>ADD</button>
                 </form>
+                
+                @error('title')
+                    <div class="error">{{ $message }}</div>
+                @enderror
 
             </div>
             <div class="category-box">

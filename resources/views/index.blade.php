@@ -12,11 +12,15 @@
         </span>
         <span style="font-size: 20px; margin-left: 10px;">{{ $categories[0]->title }}</span>
 
-        <form method="post" action="{{ route('recipes.store', $categories[0]) }}" class="recipe-form">
+        <form method="post" action="{{ route('recipes.store', $categories[0]) }}" class="recipe-form" enctype="multipart/form-data">
             @csrf
             <p>add recipe</p>
-            <input type="text" name="body">
+            <p><input type="text" name="body"></p>
+            <p><input type="image" name="image"></p>
+            <button>UPLOAD</button>
         </form>
+
+        <hr>
 
         <ul style="margin-top: 15px;">
             @foreach ($categories[0]->recipes as $recipe)

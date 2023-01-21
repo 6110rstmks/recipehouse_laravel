@@ -17,11 +17,11 @@ class Category extends Model
 
     public function recipes()
     {
-        return $this->belongsToMany(Recipe::class, 'category_recipe_user');
+        return $this->belongsToMany(Recipe::class, 'category_recipe');
     }
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'category_recipe_user');
+        return $this->belongsToMany(User::class, 'category_user');
     }
 }

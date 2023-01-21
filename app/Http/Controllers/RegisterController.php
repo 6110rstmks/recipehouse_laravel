@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\RegisterRequest;
+
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
@@ -27,7 +29,7 @@ class RegisterController extends Controller
      * @param
      * @return void
      */
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
 
         // すでに登録済みのユーザ名があるかどうかというのはいらない,schema builderでunique()をつかっているため

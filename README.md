@@ -11,7 +11,7 @@ I dared to configure db without foreign key constraint.
 pagination
 many-to-many(user-category-recipe)
 
-レシピ一覧リストにおいて、ajaxのdeleteができる（自分が作成したレシピの場合）
+レシピ一覧リストにおいて、ajaxのdeleteができる（☓ボタンが表示される）（自分が作成したレシピの場合）
 管理者の場合、pruneができる。
 
 レシピ一覧リストからカテゴリを選択してレシピをajaxで追加することができる。（ログイン時のみレシピを登録できるようにする）

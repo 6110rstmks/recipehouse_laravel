@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class RecipeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,21 +19,21 @@ class CategoryRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function rules()
     {
         return [
-            'title' => 'required|min:2',
+            'body' => 'required|min:3',
+            'image' => 'mimes:jpeg,png,gif,jpg',
         ];
     }
 
     public function messages()
     {
         return [
-            'title.required' => 'Title is required.',
-            // 'update-title.required' => 'Title is required.',
-            'title.min' => 'Please enter at least :min character',
+            'body.required' => 'recipe title is required',
+            'body.min' => 'Please enter at least :min character',
         ];
     }
 }

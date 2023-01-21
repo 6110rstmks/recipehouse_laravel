@@ -9,17 +9,23 @@
     {{-- if thre is no categories, right screen display nothing. --}}
     <h1>*List*  {{ $category->title }}</h1>
 
-    <form method="post" action="{{ route('recipes.store', $category) }}" class="task-form">
-    {{-- <form method="post" action="{{ route('recipes.store', $recipe) }}" class="task-form"> --}}
+    <form method="post" action="{{ route('recipes.store', $category) }}" class="task-form" enctype="multipart/form-data">
         @csrf
         <p>add recipe</p>
         <input type="text" name="body">
+
+        @error('body')
+            <div class="error">{{ $message }}</div>
+        @enderror
+        <p><input type="image" name="image"></p>
+        <button>アップロード</button>
     </form>
+
     <ul>
         @foreach ($category->recipes as $recipe)
             <li>
                 {{ $recipe->body }}
-                <form method="post" action="{{ route('recipes.destroy', $category, $recipe) }}" class="delete-comment">
+                <form method="post" action="{{ route('recipes.destroy', $recipe) }}" class="delete-comment">
                     @method('DELETE')
                     @csrf
                     <button class="btn">削除</button>

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,21 +19,21 @@ class CategoryRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function rules()
     {
         return [
-            'title' => 'required|min:2',
+            'username' => 'between:3,8|unique:users',
+            'password' => 'required|between:8,20|confirmed|regex:/[A-Za-z0-9]{8,21}/'
         ];
     }
 
     public function messages()
     {
         return [
-            'title.required' => 'Title is required.',
-            // 'update-title.required' => 'Title is required.',
-            'title.min' => 'Please enter at least :min character',
+            'username.between' => 'Please enter at within three to ten words.',
+            'username.unique' => 'Its username is already registered.'
         ];
     }
 }

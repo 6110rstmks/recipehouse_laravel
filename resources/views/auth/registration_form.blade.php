@@ -3,8 +3,8 @@
 <div class="card-body">
 
     @auth
-    <p style="display: inline">You are certificated.</p>
-    <a href="{{ route('categories.index')}}"><button>Go to home</button></a>
+        <p style="display: inline">You are certificated.</p>
+        <a href="{{ route('categories.index')}}"><button>Go to home</button></a>
 
     @endauth
 
@@ -14,23 +14,26 @@
 
     <form method="POST" action="{{ route('saveRegister') }}">
         @csrf
-
-
-
         <div class="form-group row">
-            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+            {{-- <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label> --}}
+            <label for="">Name</label>
 
 
             <div class="col-md-6">
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="username" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="name" autofocus> --}}
+                <input type="text" name="username" id="">
 
-                @error('name')
+                {{-- @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                @enderror
+                @enderror --}}
             </div>
         </div>
+
+        @error('title')
+            <div class="error">{{ $message }}</div>
+        @enderror
 
         <div>
             <div>email</div>
@@ -42,13 +45,7 @@
             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
             <div class="col-md-6">
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
             </div>
         </div>
 
@@ -56,7 +53,7 @@
             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
             <div class="col-md-6">
-                <input id="password-conf" type="password" class="form-control" name="password_conf" required autocomplete="new-password">
+                <input id="password-conf" type="password" class="form-control" name="password_conf" autocomplete="new-password">
             </div>
         </div>
 

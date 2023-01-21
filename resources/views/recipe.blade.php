@@ -20,11 +20,23 @@
     <a href="{{ route('categories.index') }}">mypage from here</a>
 @endauth
 
+<form action="">
+    <select name="" id="">
+        @forelse ($categories as $category)
+            <option value="">{{ $category->title}}</option>
+        @empty
+            <option value="">no category</option>
+        @endforelse
+    </select>
+</form>
 
 
 @auth
     商品登録
-    <form action="">
+
+    <form action="{{ route('recipes.store',) }}" method="POST">
+
+
         <input type="text" name="" id="">
     </form>
 @endauth

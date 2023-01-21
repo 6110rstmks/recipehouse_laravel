@@ -41,8 +41,6 @@ class AuthController extends Controller
 
         $credentials = $request->only('username', 'password');
 
-        // $remember_me = $request->input('remember_me');
-
         $remember_me = $request->has('remember_me') ? true : false;
 
 

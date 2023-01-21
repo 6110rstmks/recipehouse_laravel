@@ -7,6 +7,8 @@
     <button class="purge-category">purge</button>
 </form>
 {{-- <span class="button is-success purge-category" style="margin-top: 12px;">purge</span> --}}
+
+{{-- カテゴリを表示 --}}
 <ul class="category_ul">
     @forelse ($categories as $category)
     <li>
