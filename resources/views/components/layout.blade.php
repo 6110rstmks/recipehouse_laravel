@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>recipe house</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
     <link rel="stylesheet" href="{{ url('css/style.css') }}">
 </head>
 <body>
@@ -36,7 +36,7 @@
                     <input type="text" class="title-input" name="title" placeholder="entry category name" value="{{ old('title') }}">
                     <button>ADD</button>
                 </form>
-                
+
                 @error('title')
                     <div class="error">{{ $message }}</div>
                 @enderror

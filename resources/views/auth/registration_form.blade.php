@@ -1,3 +1,7 @@
+<head>
+    <link rel="stylesheet" href="{{ url('css/style.css') }}">
+</head>
+
 <h1>User Register</h1>
 
 <div class="card-body">
@@ -14,24 +18,13 @@
 
     <form method="POST" action="{{ route('saveRegister') }}">
         @csrf
-        <div class="form-group row">
-            {{-- <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label> --}}
-            <label for="">Name</label>
+        <div>
+            <label for="">UserName</label>
 
-
-            <div class="col-md-6">
-                {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="name" autofocus> --}}
-                <input type="text" name="username" id="">
-
-                {{-- @error('name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror --}}
-            </div>
+            <p><input type="text" name="username" value="{{ old('username')}}"></p>
         </div>
 
-        @error('title')
+        @error('username')
             <div class="error">{{ $message }}</div>
         @enderror
 
@@ -41,35 +34,28 @@
         </div>
 
 
-        <div class="form-group row">
-            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
+        <div>
+            <div>password</div>
             <div class="col-md-6">
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
+                <input type="password" name="password">
             </div>
         </div>
 
-        <div class="form-group row">
-            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+        @error('password')
+        <div class="error">{{ $message }}</div>
+        @enderror
 
+        <div>
+            <div>Confirm Password</div>
             <div class="col-md-6">
-                <input id="password-conf" type="password" class="form-control" name="password_conf" autocomplete="new-password">
+                <input type="password" name="password_conf">
             </div>
         </div>
 
-        @if (session('match_error'))
-            <div class="alert alert-success" style="color: red">
-                {{ session('match_error') }}
-            </div>
-        @endif
-
-        <div class="form-group row mb-0">
-            <div class="col-md-6 offset-md-4">
-                <button type="submit" class="btn btn-primary">
-                    {{ __('Register') }}
-                </button>
-            </div>
-        </div>
+        @error('password_conf')
+            <div class="error">{{ $message }}</div>
+        @enderror
+        <button>Register</button>
     </form>
 
     <a href="{{ route('showLogin') }}">user sign in is here</a>

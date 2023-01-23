@@ -24,16 +24,22 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'between:3,8|unique:users',
-            'password' => 'required|between:8,20|confirmed|regex:/[A-Za-z0-9]{8,21}/'
+            'username' => 'required|between:3,8|unique:users',
+            // 'password' => 'required|between:8,20|regex:/\A(?=.*?[a-z])(?=.*?\d)(?=.*?[!-\/:-@[-`{-~])[!-~]+\z/i',
+            'password_conf' => 'same:password'
         ];
     }
 
     public function messages()
     {
         return [
+            'username.required' => 'username is required',
             'username.between' => 'Please enter at within three to ten words.',
-            'username.unique' => 'Its username is already registered.'
+            'username.unique' => 'Its username is already registered.',
+            'password.required' => 'password is required',
+            'password.between' => 'Please enter at within three to ten words.',
+            'password.regex' => '半角英数字のみ',
+            'password_conf.same' => 'password_conf is not match'
         ];
     }
 }

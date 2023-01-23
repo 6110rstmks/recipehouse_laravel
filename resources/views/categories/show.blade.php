@@ -17,14 +17,15 @@
         @error('body')
             <div class="error">{{ $message }}</div>
         @enderror
-        <p><input type="image" name="image"></p>
+        <p><input type="file" name="image"></p>
         <button>アップロード</button>
     </form>
+    <hr>
 
     <ul>
         @foreach ($category->recipes as $recipe)
             <li>
-                {{ $recipe->body }}
+                <a href="{{ route('recipes.show', $recipe) }}">{{ $recipe->body }}</a>
                 <form method="post" action="{{ route('recipes.destroy', $recipe) }}" class="delete-comment">
                     @method('DELETE')
                     @csrf

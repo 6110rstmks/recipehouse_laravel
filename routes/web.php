@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RecipeController;
-// use App\Http\Controllers\LogController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\Auth\AuthController;
@@ -20,6 +20,9 @@ Route::post('/register', [RegisterController::class, 'register'])
 Route::get('/recipes/list', [RecipeController::class, 'list'])
     ->name('recipes.list');
 
+Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])
+    ->name('recipes.show');
+
 Route::group(['middleware' => ['guest']], function() {
 
 
@@ -28,6 +31,14 @@ Route::group(['middleware' => ['guest']], function() {
 
     Route::post('login', [AuthController::class, 'login'])
         ->name('login');
+
+    // password reset process
+    Route::get('password-reset', [PasswordResetController::class, 'index'])
+        ->name('showPasswordReset');
+
+    Route::get('password-reset-show', [PasswordResetController::class, 'sendEmail'])
+        ->name('SendEmailForPasswordReset');
+
 
 });
 
@@ -88,23 +99,23 @@ Route::group(['middleware' => ['auth']], function() {
 
 });
 
-// パスワードリセット関連
-Route::prefix('password_reset')->name('password_reset.')->group(function () {
-    Route::prefix('email')->name('email.')->group(function () {
-        // パスワードリセットメール送信フォームページ
-        Route::get('/', [PasswordController::class, 'emailFormResetPassword'])->name('form');
-        // メール送信処理
-        Route::post('/', [PasswordController::class, 'sendEmailResetPassword'])->name('send');
-        // メール送信完了ページ
-        Route::get('/send_complete', [PasswordController::class, 'sendComplete'])->name('send_complete');
-    });
-    // パスワード再設定ページ
-    Route::get('/edit', [PasswordController::class, 'edit'])->name('edit');
-    // パスワード更新処理
-    Route::post('/update', [PasswordController::class, 'update'])->name('update');
-    // パスワード更新終了ページ
-    Route::get('/edited', [PasswordController::class, 'edited'])->name('edited');
-});
+// // パスワードリセット関連
+// Route::prefix('password_reset')->name('password_reset.')->group(function () {
+//     Route::prefix('email')->name('email.')->group(function () {
+//         // パスワードリセットメール送信フォームページ
+//         Route::get('/', [PasswordController::class, 'emailFormResetPassword'])->name('form');
+//         // メール送信処理
+//         Route::post('/', [PasswordController::class, 'sendEmailResetPassword'])->name('send');
+//         // メール送信完了ページ
+//         Route::get('/send_complete', [PasswordController::class, 'sendComplete'])->name('send_complete');
+//     });
+//     // パスワード再設定ページ
+//     Route::get('/edit', [PasswordController::class, 'edit'])->name('edit');
+//     // パスワード更新処理
+//     Route::post('/update', [PasswordController::class, 'update'])->name('update');
+//     // パスワード更新終了ページ
+//     Route::get('/edited', [PasswordController::class, 'edited'])->name('edited');
+// });
 
 
 

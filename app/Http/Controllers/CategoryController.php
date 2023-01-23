@@ -35,7 +35,7 @@ class CategoryController extends Controller
         $categories = $authenticated_user->categories;
 
 
-        return view('posts.show')
+        return view('categories.show')
             ->with([
                 'category' => $category,
                 'categories' => $categories,

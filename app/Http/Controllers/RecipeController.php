@@ -18,12 +18,17 @@ class RecipeController extends Controller
         $categories = Category::latest()->get();
 
 
-
         return view('recipe')
             ->with([
                 'recipes' => $recipes,
                 'categories' => $categories,
             ]);
+    }
+
+    public function show(Recipe $recipe)
+    {
+        return view('recipes.show')
+            ->with(['recipe' => $recipe]);
     }
 
     /**
@@ -43,7 +48,6 @@ class RecipeController extends Controller
 
         $recipe->body = $request->body;
 
-        $dir = 'sample';
 
         if ($request->has('image'))
         {
@@ -52,11 +56,13 @@ class RecipeController extends Controller
             $file_name = $request->file('image')->getClientOriginalName();
 
             // アップロードされたファイルの容量を取得
-
             $file_size = $request->file('image')->getSize();
 
-            $request->file('image')->storeAs('public/' . $dir, $file_name);
+            $request->file('image')->storeAs('public', $file_name);
+
+            $recipe->file_path = $file_name;
         }
+
 
         $recipe->save();
 

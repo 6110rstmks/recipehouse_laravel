@@ -11,6 +11,7 @@ class Recipe extends Model
 
     protected $fillable = [
         'body',
+        'file_path'
     ];
 
     public function categories()
