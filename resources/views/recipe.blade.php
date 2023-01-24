@@ -13,11 +13,11 @@
 
 @guest
     <p>You can add recipes if you sign in</p>
-    <a href="{{ route('showLogin') }}">sign in form from here</a>
+    <button><a href="{{ route('showLogin') }}">sign in form from here</a></button>
 @endguest
 
 @auth
-    <a href="{{ route('categories.index') }}">mypage from here</a>
+    <button><a href="{{ route('categories.index') }}">mypage from here</a></button>
 @endauth
 
 {{-- <form action="{{ route('recipes.store',) }}" method="POST">

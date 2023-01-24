@@ -17,6 +17,9 @@
             @csrf
             <p>add recipe</p>
             <p><input type="text" name="body"></p>
+            @error('body')
+                <div class="error">{{ $message }}</div>
+            @enderror
             <p><input type="file" name="image"></p>
             <button>UPLOAD</button>
         </form>

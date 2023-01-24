@@ -17,6 +17,7 @@
         @error('body')
             <div class="error">{{ $message }}</div>
         @enderror
+
         <p><input type="file" name="image"></p>
         <button>アップロード</button>
     </form>
