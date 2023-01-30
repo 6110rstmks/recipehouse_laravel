@@ -20,6 +20,9 @@ class RegisterController extends Controller
         $this->user = $user;
     }
 
+    /**
+     * 
+     */
     public function showRegistrationForm()
     {
         return view('auth.registration_form');
