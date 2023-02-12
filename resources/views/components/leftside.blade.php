@@ -1,11 +1,11 @@
 
 {{-- this file reprezent the left screen --}}
 
-<form action="{{ route('categories.purge') }}" method="POST">
+{{-- <form action="{{ route('categories.purge') }}" method="POST">
     @method('delete')
     @csrf
     <button class="purge-category">purge</button>
-</form>
+</form> --}}
 {{-- <span class="button is-success purge-category" style="margin-top: 12px;">purge</span> --}}
 
 {{-- カテゴリを表示 --}}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 
@@ -19,7 +19,6 @@ class PasswordResetController extends Controller
 
         $token = rand(1111, 9999);
 
-        
 
     }
 }
