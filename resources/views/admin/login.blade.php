@@ -5,9 +5,9 @@
         <form method="POST" action="{{ route('admin.login') }}">
             @csrf
             <div class="form-group">
-                <span>名前</span>
+                <span>email</span>
 
-                <input style="width: 260px;" type="text" name="name" value="{{ old('name') }}">
+                <input style="width: 260px;" type="text" name="email" value="{{ old('email') }}">
                 {{-- @endif --}}
             </div>
             <div>

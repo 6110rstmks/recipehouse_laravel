@@ -50,14 +50,14 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('name', 'password');
+        $credentials = $request->only('email', 'password');
 
         if (Auth::guard('admin')->attempt($credentials, false))
         {
             // session hijacking countermeasure
             $request->session()->regenerate();
 
-            return redirect()->route('');
+            return redirect()->route('admin.home');
         }
     }
 

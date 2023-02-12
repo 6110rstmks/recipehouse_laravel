@@ -22,10 +22,10 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                // return redirect(RouteServiceProvider::HOME);
-                // return redirect(RouteServiceProvider::POSTS);
+            if (Auth::guard($guard)->check() && $guard == 'web') {
                 return redirect(RouteServiceProvider::CATEGORIES);
+            } elseif (Auth::guard($guard)->check() && $guard == 'admin') {
+                return redirect()->route('admin.home');
             }
         }
 
