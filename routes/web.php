@@ -52,8 +52,7 @@ Route::group(['middleware' => ['guest:web']], function() {
 Route::group([
     'middleware' => 'guest:admin',
     'prefix' => 'admin',
-    'namespace' => 'App\Http\Controllers\Admin',
-    // 'name' => 'admin.'
+    // 'namespace' => 'App\Http\Controllers\Admin',
 
     ], function(){
 
@@ -62,7 +61,7 @@ Route::group([
         return view('admin.register');
     })->name('admin.register_page');
 
-    Route::post('/register', [RegisterController::class, 'register'])
+    Route::post('/register', [App\Http\Controllers\Admin\RegisterController::class, 'register'])
         ->name('admin.register');
 
     // show loginPage
@@ -139,4 +138,15 @@ Route::group([
             ->where('category', '[0-9]+');
     });
 
+});
+
+Route::group([
+    'middleware' => 'auth:admin',
+    'prefix' => 'admin',
+    // 'namespace' => 'App\Http\Controllers\Admin',
+    ], function() {
+
+    Route::get('/home', function() {
+        return view('admin.home');
+    });
 });

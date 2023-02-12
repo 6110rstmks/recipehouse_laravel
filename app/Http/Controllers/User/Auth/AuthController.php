@@ -47,8 +47,6 @@ class AuthController extends Controller
         // ユーザの一レコードの値を取得。
         $user = $this->user->getUser($credentials['username']);
 
-        Log::debug($user);
-
         // ユーザがあるかどうか
         if ($user != false)
         {
@@ -60,7 +58,7 @@ class AuthController extends Controller
                 ]);
             }
 
-            if (Auth::attempt($credentials, $remember_me))
+            if (Auth::guard('web')->attempt($credentials, $remember_me))
             {
                 // session hijacking countermeasure
                 $request->session()->regenerate();
@@ -106,7 +104,7 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('web')->logout();
 
         $request->session()->invalidate();
         // これの意味を理解したい。

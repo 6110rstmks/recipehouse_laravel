@@ -16,3 +16,8 @@ many-to-many(user-category-recipe)
 
 レシピ一覧リストからカテゴリを選択してレシピをajaxで追加することができる。（ログイン時のみレシピを登録できるようにする）
 
+# authentication
+
+reset-mail for forgetting-password
+
+
