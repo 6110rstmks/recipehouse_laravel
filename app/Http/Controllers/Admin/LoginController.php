@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 // use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Log;
+
 
 
 class LoginController extends Controller
@@ -50,6 +52,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        Log::info('lkj');
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('admin')->attempt($credentials, false))

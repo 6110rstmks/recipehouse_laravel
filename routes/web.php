@@ -9,7 +9,10 @@ use App\Http\Controllers\RegisterController;
 
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\User\Auth\AuthController;
-use App\Http\Controllers\Admin\LoginController;
+// use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin;
+
+
 
 // Auth process
 
@@ -52,7 +55,7 @@ Route::group(['middleware' => ['guest:web']], function() {
 Route::group([
     'middleware' => 'guest:admin',
     'prefix' => 'admin',
-    // 'namespace' => 'App\Http\Controllers\Admin',
+    // 'namespace' => 'Admin',
 
     ], function(){
 
@@ -143,10 +146,16 @@ Route::group([
 Route::group([
     'middleware' => 'auth:admin',
     'prefix' => 'admin',
-    // 'namespace' => 'App\Http\Controllers\Admin',
+    'namespace' => 'Admin',
+    'as' => 'admin.',
     ], function() {
 
     Route::get('/home', function() {
         return view('admin.home');
-    })->name('admin.home');
+    })->name('home');
+
+    Route::get('/members/list', [Admin\UserController::class, 'list'])
+        ->name('members.list');
+
+
 });

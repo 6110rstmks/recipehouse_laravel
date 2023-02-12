@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Hash;
+
 class UserSeeder extends Seeder
 {
     /**
@@ -19,7 +21,7 @@ class UserSeeder extends Seeder
             User::create([
                 'username' => 'user' . $i,
                 'email' => 'co' . $i . '@a',
-                'password' => '119089meisei'
+                'password' => Hash('119089meisei'),
             ]);
         }
     }
