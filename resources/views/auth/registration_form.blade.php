@@ -58,5 +58,5 @@
         <button>Register</button>
     </form>
 
-    <a href="{{ route('showLogin') }}">user sign in is here</a>
+    <a href="{{ route('login_form') }}">user sign in is here</a>
 </div>

@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\LoginFormRequest;
 use illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
+// use Illuminate\Support\Facades\Log;
+use Illuminate\Auth\Events\Login;
+
 
 
 class AuthController extends Controller
@@ -70,9 +72,12 @@ class AuthController extends Controller
                     $user->save();
                 }
 
+                // event(new Login(Auth::guard('web'), $user));
+                event(new Login('web', $user));
+
+
                 // recipehouseへ移動
                 return redirect('categories');
-                // return redirect()->route('posts.index');
             }
 
             // ログインに失敗したらエラーカウントを1増やす
@@ -111,6 +116,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('showLogin')->with('logout_msg', 'logout is done.');
+        return redirect()->route('login_form')->with('logout_msg', 'logout is done.');
     }
 }

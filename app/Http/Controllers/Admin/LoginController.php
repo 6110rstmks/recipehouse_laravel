@@ -57,10 +57,16 @@ class LoginController extends Controller
 
         if (Auth::guard('admin')->attempt($credentials, false))
         {
+            Log::info('self');
             // session hijacking countermeasure
             $request->session()->regenerate();
 
             return redirect()->route('admin.home');
+        } else {
+
+            return back()->withErrors([
+                'err' => 'email or password is incorrect.'
+            ]);
         }
     }
 

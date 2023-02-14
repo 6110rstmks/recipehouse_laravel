@@ -31,13 +31,13 @@ Route::get('/recipes/list', [RecipeController::class, 'list'])
 
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])
     ->name('recipes.show');
-
+    
 
 Route::group(['middleware' => ['guest:web']], function() {
 
 
     Route::get('/', [AuthController::class, 'showLogin'])
-        ->name('showLogin');
+        ->name('login_form');
 
     Route::post('login', [AuthController::class, 'login'])
         ->name('login');
@@ -56,24 +56,28 @@ Route::group([
     'middleware' => 'guest:admin',
     'prefix' => 'admin',
     // 'namespace' => 'Admin',
+    // 'as' => 'admin'
 
     ], function(){
 
     // 管理者作成画面
     Route::get('/register', function () {
         return view('admin.register');
+    // })->name('register_page');
     })->name('admin.register_page');
 
     Route::post('/register', [App\Http\Controllers\Admin\RegisterController::class, 'register'])
+        // ->name('register');
         ->name('admin.register');
 
     // show loginPage
     Route::get('/login', function () {
         return view('admin.login');
+    // })->name('login_page');
     })->name('admin.login_page');
 
 
-    Route::post('/login', [LoginController::class, 'login'])
+    Route::post('/login', [App\Http\Controllers\Admin\LoginController::class, 'login'])
         ->name('admin.login');
 
 });
@@ -105,6 +109,7 @@ Route::group([
         ->where('recipe', '[0-9]+');
 
 
+    // カテゴリ関連
     Route::group(['prefix' => 'categories', 'as' => 'categories.'], function() {
         Route::get('/', [CategoryController::class, 'index'])
         ->name('index');

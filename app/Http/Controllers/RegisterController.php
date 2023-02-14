@@ -47,21 +47,17 @@ class RegisterController extends Controller
             ]);
         }
 
-        User::create([
+        // ユーザ作成と同時にログインを行う
+        //
+        Auth::login($user = User::create([
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+        ]));
 
         $credentials = $request->only('username', 'password');
 
-
-        if (Auth::attempt($credentials))
-        {
-            return redirect('categories');
-        }
-
-
+        return redirect('categories');
     }
 
 
