@@ -19,11 +19,11 @@
 
             <button>退会はこちら（未実装）</button>
 
-            <a href="{{ route('recipes.list') }}"><button>recipe一覧はここから</button></a>
+            <a href="{{ route('recipes.list') }}"><button>recipe list is here</button></a>
 
             <a href="{{ route('showRegister') }}"><button>user registeration is here</button></a>
 
-            <li class="text-red-500">username: {{ Auth::user()->username }}</li>
+            <p class="text-red-500">Hello <span style="color: green">{{ Auth::user()->username }}</span></p>
             <div class="form-box">
                 <h4 style="margin-bottom: 20px; margin-top: 10px">RECIPE HOUSE</h4>
 

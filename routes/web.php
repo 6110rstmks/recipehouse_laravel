@@ -7,9 +7,7 @@ use App\Http\Controllers\User\RecipeController;
 
 use App\Http\Controllers\RegisterController;
 
-use App\Http\Controllers\PasswordController;
-use App\Http\Controllers\User\Auth\AuthController;
-// use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\User\Auth;
 use App\Http\Controllers\Admin;
 
 
@@ -31,24 +29,31 @@ Route::get('/recipes/list', [RecipeController::class, 'list'])
 
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])
     ->name('recipes.show');
-    
+
 
 Route::group(['middleware' => ['guest:web']], function() {
 
-
-    Route::get('/', [AuthController::class, 'showLogin'])
+    Route::get('/', [Auth\AuthController::class, 'showLogin'])
         ->name('login_form');
 
-    Route::post('login', [AuthController::class, 'login'])
+    Route::post('login', [Auth\AuthController::class, 'login'])
         ->name('login');
 
-    // password reset process
-    Route::get('password-reset', [PasswordResetController::class, 'index'])
-        ->name('showPasswordReset');
+    // password reset page
+    Route::get('password-reset-page', [Auth\PasswordResetController::class, 'index'])
+        ->name('password-reset-page');
 
-    Route::get('password-reset-show', [PasswordResetController::class, 'sendEmail'])
-        ->name('SendEmailForPasswordReset');
+    // send email for password-reset process
+    Route::post('password-reset-show', [Auth\PasswordResetController::class, 'sendEmail'])
+        ->name('send-email-password-reset');
 
+    // code entry page for password-reset
+    Route::get('auth-code-form', function () {
+        return view('reset.auth_code_form');
+    })->name('auth-code.entry_form');
+
+    Route::post('password-reset', [Auth\PasswordResetController::class, 'resetPassword'])
+        ->name('password_reset');
 
 });
 

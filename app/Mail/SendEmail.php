@@ -9,7 +9,8 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class AuthCode extends Mailable
+
+class SendEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,9 +19,9 @@ class AuthCode extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($auth_code)
     {
-        //
+        $this->auth_code = $auth_code;
     }
 
     /**
@@ -31,7 +32,7 @@ class AuthCode extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Auth Code',
+            subject: 'Send Email',
         );
     }
 
@@ -43,7 +44,10 @@ class AuthCode extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'mails.password_reset_mail',
+            with: [
+                'auth_code' => $this->auth_code,
+            ]
         );
     }
 

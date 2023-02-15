@@ -4,8 +4,10 @@
 <h1>recipe list</h1>
 
 @foreach ($recipes as $recipe)
-
-    <p>{{ $recipe->body }}</p>
+<p>
+    <span>recipe name:</span>
+    <span>{{ $recipe->body }}</span>
+</p>
 
 @endforeach
 
@@ -13,7 +15,7 @@
 
 @guest
     <p>You can add recipes if you sign in</p>
-    <button><a href="{{ route('showLogin') }}">sign in form from here</a></button>
+    <button><a href="{{ route('login_form') }}">sign in form from here</a></button>
 @endguest
 
 @auth

@@ -52,7 +52,7 @@
             <button style="display: block" type="submit">Login in</button>
         </form>
 
-        <a href="{{ route('showPasswordReset') }}">パスワードをお忘れの方</a>
+        <a href="{{ route('password-reset-page') }}">パスワードをお忘れの方</a>
 
     </div>
 
