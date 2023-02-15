@@ -1,6 +1,3 @@
-{{-- step1ログイン時のみタスク追加ができるようにする --}}
-{{-- step2 --}}
-
 <h1>recipe list</h1>
 
 @foreach ($recipes as $recipe)
@@ -19,7 +16,7 @@
 @endguest
 
 @auth
-    <button><a href="{{ route('categories.index') }}">mypage from here</a></button>
+    <button><a href="{{ route('user.home') }}">mypage from here</a></button>
 @endauth
 
 {{-- <form action="{{ route('recipes.store',) }}" method="POST">

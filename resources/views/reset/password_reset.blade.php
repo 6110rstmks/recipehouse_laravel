@@ -6,21 +6,18 @@
     <div>
         <label for="email">Email</label>
         <p><input type="text" name="email" id="email" value="{{ old('email') }}"></p>
-        @error('email')
-            <span class="error">{{ $message }}</span>
-        @enderror
     </div>
     <button>submit mail for password-reset</button>
 </form>
 
 @if ($errors->any())
-<div class="alert alert-danger" style="color: red;">
-    <ul>
-        @foreach ($errors->all() as $error)
-            <div>{{ $error }}</div>
-        @endforeach
-    </ul>
-</div>
+    <div class="alert alert-danger" style="color: red;">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <div>{{ $error }}</div>
+            @endforeach
+        </ul>
+    </div>
 @endif
 
 <a href="{{ route('login_form') }}">ログイン画面に戻る</a>

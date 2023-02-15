@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendEmail;
 use App\Http\Requests\PasswordResetRequest;
+use App\Http\Requests\EmailSendRequest;
 
 
 
@@ -18,27 +19,36 @@ class PasswordResetController extends Controller
         return view('reset.password_reset');
     }
 
-    public function sendEmail(PasswordResetRequest $request)
-    // public function sendEmail(Request $request)
+    public function sendEmail(EmailSendRequest $request)
     {
         $to_mail_address = $request->input('email');
 
-        $email = User::where('email', '=', $request->email)->exists();
+        $user = User::where("email", $to_mail_address)->first();
 
-        $request->session()->put('update_password_for_email', $request->email);
+        $code = random_int(100,999);
 
-        if (empty($email))
-        {
-            $request->session()->put('send_email', $request->email);
-            return redirect()->back()->withErrors(['err_msg' => '入力されたメールアドレスは存在しません']);
-        }
+        // save auth_code in DB.
+        $user->auth_code = $code;
 
-        $code = random_int(10000,99999);
+        $user->save();
+
 
         Mail::to($to_mail_address)
             ->send(new SendEmail($code));
 
         return redirect()->route('auth-code.entry_form');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'auth_code' => 'required|integer',
+            'password' => 'required|between:8,20|regex:/\A(?=.*?[a-z])(?=.*?\d)(?=.*?[!-\/:-@[-`{-~])[!-~]+\z/i',
+            'password_conf' => 'same:password'
+        ], [
+            'password.regex' => '半角英数字のみです。'
+        ]);
+        $request->auth_code;
     }
 
 }

@@ -10,7 +10,7 @@
 
 <body>
     <script src="{{ asset('js/app.js') }}"></script>
-    <a href="{{ route('showRegister') }}"><button>user registration is here</button></a>
+    <a href="{{ route('register_page') }}"><button>user registration is here</button></a>
     <a href="{{ route('recipes.list') }}"><button>recipe list is here</button></a>
 
     @if (session('login_error'))

@@ -77,7 +77,8 @@ class AuthController extends Controller
 
 
                 // recipehouseへ移動
-                return redirect('categories');
+                // return redirect('categories');
+                return redirect()->route('user.home');
             }
 
             // ログインに失敗したらエラーカウントを1増やす

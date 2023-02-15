@@ -57,7 +57,7 @@ class RegisterController extends Controller
 
         $credentials = $request->only('username', 'password');
 
-        return redirect('categories');
+        return redirect()->route('user.home');
     }
 
 

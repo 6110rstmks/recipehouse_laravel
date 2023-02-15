@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin;
 
 // ユーザ作成画面
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])
-    ->name('showRegister');
+    ->name('register_page');
 
 // ユーザ作成処理
 Route::post('/register', [RegisterController::class, 'register'])
@@ -50,7 +50,9 @@ Route::group(['middleware' => ['guest:web']], function() {
     // code entry page for password-reset
     Route::get('auth-code-form', function () {
         return view('reset.auth_code_form');
-    })->name('auth-code.entry_form');
+    })
+    ->name('auth-code.entry_form')
+    ->middleware('auth_code_form');
 
     Route::post('password-reset', [Auth\PasswordResetController::class, 'resetPassword'])
         ->name('password_reset');
@@ -91,6 +93,10 @@ Route::group([
     'middleware' => ['auth:web'],
     'namespace' => 'App\Http\Controllers\User',
     ], function() {
+
+    Route::get('home', function () {
+        return view('user.home');
+    })->name('user.home');
 
     // logout
 

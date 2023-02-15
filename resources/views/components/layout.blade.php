@@ -12,16 +12,11 @@
 
         <div class="left-container">
         <h1 class="text-3xl font-bold underline"></h1>
-            <form action="{{ route('logout') }}" method="POST">
-            @csrf
-                <button>logout</button>
-            </form>
-
-            <button>退会はこちら（未実装）</button>
 
             <a href="{{ route('recipes.list') }}"><button>recipe list is here</button></a>
 
-            <a href="{{ route('showRegister') }}"><button>user registeration is here</button></a>
+            <button><a href="{{route('user.home')}}">MY PAGE</a></button>
+
 
             <p class="text-red-500">Hello <span style="color: green">{{ Auth::user()->username }}</span></p>
             <div class="form-box">
