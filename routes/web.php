@@ -28,7 +28,8 @@ Route::get('/recipes/list', [RecipeController::class, 'list'])
 
 
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])
-    ->name('recipes.show');
+    ->name('recipes.show')
+    ->where('recipe', '[0-9]+');
 
 
 Route::group(['middleware' => ['guest:web']], function() {
@@ -113,10 +114,17 @@ Route::group([
 
     // レシピを削除
     Route::delete('/recipes/{recipe}/destroy', [RecipeController::class, 'destroy'])
-    // Route::delete('/categories/{recipe}/{recipe}/destroy', [RecipeController::class, 'destroy'])
+    // Route::delete('/categories/{category}/{recipe}/destroy', [RecipeController::class, 'destroy'])
     // 上のコメントアウトしているやつでやろうとしたがうまくいかなくて断念
     // dotinstallをみると/recipes/{recipe}/destroyでやっていた。
         ->name('recipes.destroy')
+        ->where('recipe', '[0-9]+');
+
+    Route::get('/recipes/deleted_list', [RecipeController::class, 'deletedList'])
+        ->name('recipes.deletedList');
+
+    Route::post('/restore/{recipe}/', [RecipeController::class, 'restore'])
+        ->name('recipes.restore')
         ->where('recipe', '[0-9]+');
 
 
@@ -170,8 +178,11 @@ Route::group([
         return view('admin.home');
     })->name('home');
 
-    Route::get('/members/list', [Admin\UserController::class, 'list'])
-        ->name('members.list');
+    Route::get('/users/list', [Admin\UserController::class, 'list'])
+        ->name('users.list');
+
+    Route::get('/history/list', [Admin\UserController::class, 'historyList'])
+    ->name('histories.list');
 
 
 });

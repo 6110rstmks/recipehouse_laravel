@@ -17,13 +17,18 @@ class AuthCode
      */
     public function handle(Request $request, Closure $next)
     {
-        $prevUrl = url()->previous();
-        $domain_path = parse_url($prevUrl)['path'];
 
-        if ($domain_path != '/password-reset-page')
+        // PasswordResetControllerでメール送信を行った場合
+        // sessionに1が格納されて、以下ではそれを取得。
+        $password_reset_flg =
+            $request->session()->get('password_reset_flg', 'default');
+
+        // $request->session()->forget('password_reset_flg');
+
+        // redirect to login_form or mypage
+        if ($password_reset_flg !== 1)
         {
-            return redirect()->route('login_form');
-
+            return redirect()->route('register_page');
         }
 
         return $next($request);

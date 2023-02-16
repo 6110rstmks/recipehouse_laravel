@@ -14,9 +14,8 @@ class RegisterController extends Controller
 {
     public function register(Request $request)
     {
-        Log::info('lij');
         Admin::create([
-            'name' => $request->name,
+            'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 

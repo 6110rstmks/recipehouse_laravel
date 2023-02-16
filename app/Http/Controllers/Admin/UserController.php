@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\User;
+use App\Models\AuthHistory;
 
 class UserController extends Controller
 {
@@ -17,5 +18,12 @@ class UserController extends Controller
             ->with([
                 'users' => $users,
             ]);
+    }
+
+    public function historyList()
+    {
+        $histories = AuthHistory::all();
+
+        return view('admin.history_list');
     }
 }

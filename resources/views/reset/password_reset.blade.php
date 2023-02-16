@@ -1,6 +1,5 @@
 <h2>Please fill in your registerd email</h2>
 
-
 <form action="{{ route('send-email-password-reset') }}" method="POST">
     @csrf
     <div>
@@ -20,6 +19,6 @@
     </div>
 @endif
 
-<a href="{{ route('login_form') }}">ログイン画面に戻る</a>
+<a href="{{ route('login_form') }}">Get back to login_form</a>
 
 

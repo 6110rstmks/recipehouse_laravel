@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('pos')->nullable();
             $table->string('title')->nullable();
             $table->timestamps(); // created_at, updated_at
+            $table->softDeletes();
+
         });
     }
 

@@ -8,14 +8,13 @@
     <link rel="stylesheet" href="{{ url('css/style.css') }}">
 </head>
 <body>
-    <div class="container" style="margin-top: 30px;">
+    <button style="height: 40px"><a href="{{route('user.home')}}">MY PAGE</a></button>
+    <div class="container" style="margin-top: 12px;">
 
         <div class="left-container">
-        <h1 class="text-3xl font-bold underline"></h1>
+            <h1 class="font-bold underline"></h1>
 
             <a href="{{ route('recipes.list') }}"><button>recipe list is here</button></a>
-
-            <button><a href="{{route('user.home')}}">MY PAGE</a></button>
 
 
             <p class="text-red-500">Hello <span style="color: green">{{ Auth::user()->username }}</span></p>

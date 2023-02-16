@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 
 
 class RegisterController extends Controller
@@ -26,6 +28,10 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
+        // パスワードリセットを行うための認証コード入力画面リロードを行うとユーザ作成ページへ飛ばされる。
+        // その際にPasswordResetControllerで設定していたフラグを削除する。
+        Session::forget('password_reset_flg');
+
         return view('auth.registration_form');
     }
 
@@ -35,9 +41,6 @@ class RegisterController extends Controller
      */
     public function register(RegisterRequest $request)
     {
-
-        // すでに登録済みのユーザ名があるかどうかというのはいらない,schema builderでunique()をつかっているため
-        // if ($this->user->)
 
         // check password and password_cnf is match
         if ($request->password != $request->password_conf)

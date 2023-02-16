@@ -95,4 +95,21 @@ class RecipeController extends Controller
             ->route('categories.show', $aaa);
 
     }
+
+    public function deletedList()
+    {
+        $deleted_recipes = Recipe::onlyTrashed()->get();
+
+        Log::info($deleted_recipes);
+
+        return view('recipes.deleted_list')->with(compact('deleted_recipes'));
+
+    }
+
+    public function restore(Recipe $recipe)
+    {
+        $recipe->restore();
+
+        return redirect()->route('recipes.deletedList');
+    }
 }

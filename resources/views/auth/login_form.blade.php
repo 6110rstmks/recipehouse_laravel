@@ -41,7 +41,11 @@
                 </div>
             @endif
 
-            <label for="inputEmail" class="sr-only">username</label>
+            @if (Session::has('message'))
+                <p>{{ Session::get('message')}}</p>
+            @endif
+
+            <label for="inputEmail">username</label>
             <input style="display: block; margin-top: 30px;" type="text" name="username" id="inputUserName" class="form-control" placeholder="Name" autofocus>
 
             <label for="inputPassword">Password</label>
@@ -52,7 +56,7 @@
             <button style="display: block" type="submit">Login in</button>
         </form>
 
-        <a href="{{ route('password-reset-page') }}">パスワードをお忘れの方</a>
+        <a href="{{ route('password-reset-page') }}">Are you forgetting your password?</a>
 
     </div>
 

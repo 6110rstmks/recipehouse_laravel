@@ -18,7 +18,6 @@ class CategoryController extends Controller
         $authenticated_user = Auth::user();
 
         $categories = $authenticated_user->categories;
-        // $categories = Category::latest()->get();
 
         return view('index')
             ->with(['categories' => $categories]);

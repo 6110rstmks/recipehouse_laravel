@@ -25,7 +25,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'username' => 'required|between:3,8|unique:users',
-            'password' => 'required|between:8,20|regex:/\A(?=.*?[a-z])(?=.*?\d)(?=.*?[!-\/:-@[-`{-~])[!-~]+\z/i',
+            'password' => 'required|between:8,20|regex:/^[0-9a-zA-z-_]{8,32}$/',
             'password_conf' => 'same:password'
         ];
     }
