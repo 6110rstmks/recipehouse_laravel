@@ -13,6 +13,7 @@ class Recipe extends Model
 
 
     protected $fillable = [
+        'name',
         'body',
         'file_path'
     ];

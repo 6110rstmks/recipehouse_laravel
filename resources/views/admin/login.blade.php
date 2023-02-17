@@ -1,5 +1,5 @@
 
-<div>
+<x-layout>
     <h2>Admin login page</h2>
     <div>
         <form method="POST" action="{{ route('admin.login') }}">
@@ -25,4 +25,4 @@
             <button>ログイン</button>
         </form>
     </div>
-</div>
+</x-layout>

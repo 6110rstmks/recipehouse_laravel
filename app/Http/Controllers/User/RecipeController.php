@@ -14,11 +14,11 @@ class RecipeController extends Controller
 
     public function list()
     {
-        $recipes = Recipe::paginate(2);
+        $recipes = Recipe::paginate(5);
         $categories = Category::latest()->get();
 
 
-        return view('recipe')
+        return view('recipes.list')
             ->with([
                 'recipes' => $recipes,
                 'categories' => $categories,
@@ -38,20 +38,21 @@ class RecipeController extends Controller
     {
         // countermeasure for multiple submission
 
+        Log::debug('souzai');
+
         $request->session()->regenerateToken();
 
         $request->validate([
-            'body' => 'required',
+            'name' => 'required',
         ]);
 
         $recipe = new Recipe();
 
-        $recipe->body = $request->body;
+        $recipe->name = $request->name;
 
 
         if ($request->has('image'))
         {
-
             // アップロードされたファイル名を取得
             $file_name = $request->file('image')->getClientOriginalName();
 
@@ -106,10 +107,13 @@ class RecipeController extends Controller
 
     }
 
-    public function restore(Recipe $recipe)
+    // public function restore(Recipe $recipe)
+    public function restore($recipeId)
     {
-        $recipe->restore();
+        Log::info($recipeId);
+        Recipe::withTrashed()->where('id', $recipeId)->restore();
 
-        return redirect()->route('recipes.deletedList');
+        // return redirect()->route('recipes.deletedList');
+        return back();
     }
 }

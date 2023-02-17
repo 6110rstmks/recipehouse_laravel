@@ -26,7 +26,7 @@ Route::post('/register', [RegisterController::class, 'register'])
 Route::get('/recipes/list', [RecipeController::class, 'list'])
     ->name('recipes.list');
 
-
+// detailed page
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])
     ->name('recipes.show')
     ->where('recipe', '[0-9]+');
@@ -120,12 +120,14 @@ Route::group([
         ->name('recipes.destroy')
         ->where('recipe', '[0-9]+');
 
+    // ごみばこ
     Route::get('/recipes/deleted_list', [RecipeController::class, 'deletedList'])
         ->name('recipes.deletedList');
 
-    Route::post('/restore/{recipe}/', [RecipeController::class, 'restore'])
+    // restore process
+    Route::post('/recipes/restore/{recipeId}/', [RecipeController::class, 'restore'])
         ->name('recipes.restore')
-        ->where('recipe', '[0-9]+');
+        ->where('recipeId', '[0-9]+');
 
 
     // カテゴリ関連

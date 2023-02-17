@@ -24,6 +24,9 @@ class UserController extends Controller
     {
         $histories = AuthHistory::all();
 
-        return view('admin.history_list');
+        return view('admin.history_list')
+            ->with([
+                'histories' => $histories,
+            ]);
     }
 }

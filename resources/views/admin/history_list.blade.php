@@ -1,14 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Auth History</h1>
+<x-layout>
 
-    
-</body>
-</html>
+    <h1 class="text-amber-500">Auth History</h1>
+
+    <ul>
+
+    @foreach($histories as $history)
+
+        <li class="list-none">
+            <div>
+                {{$history->ip_address}}
+            </div>
+        </li>
+    @endforeach
+    </ul>
+
+</x-layout>
+

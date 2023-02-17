@@ -1,4 +1,4 @@
-<x-layout>
+<x-recipehouse>
     <x-slot name="left">
         {{-- <x-leftside :posts="$posts" /> --}}
         <x-leftside :categories="$categories" />
@@ -12,27 +12,27 @@
     <form method="post" action="{{ route('recipes.store', $category) }}" class="task-form" enctype="multipart/form-data">
         @csrf
         <p>add recipe</p>
-        <input type="text" name="body">
+        <input type="text" name="name">
 
         @error('body')
             <div class="error">{{ $message }}</div>
         @enderror
 
         <p><input type="file" name="image"></p>
-        <button>アップロード</button>
+        <button>UPLOAD</button>
     </form>
     <hr>
 
     <ul>
         @foreach ($category->recipes as $recipe)
             <li>
-                <a href="{{ route('recipes.show', $recipe) }}">{{ $recipe->body }}</a>
+                <a href="{{ route('recipes.show', $recipe) }}">{{ $recipe->name }}</a>
                 <form method="post" action="{{ route('recipes.destroy', $recipe) }}" class="delete-comment">
                     @method('DELETE')
                     @csrf
-                    <button class="btn">削除</button>
+                    <button class="btn">DELETE</button>
                 </form>
             </li>
         @endforeach
     </ul>
-</x-layout>
+</x-recipehouse>

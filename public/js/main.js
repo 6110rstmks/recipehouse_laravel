@@ -137,25 +137,25 @@ updateTitles.forEach(updateTitle => {
         }
     })
 
-    updateTitle.addEventListener('blur', () => {
-        updateTitle.style.cursor = 'context-menu';
-        const title = updateTitle.value;
+    // updateTitle.addEventListener('blur', () => {
+    //     updateTitle.style.cursor = 'context-menu';
+    //     const title = updateTitle.value;
 
-        fetch('/categories/' + postid + '/update', {
-            method: 'PATCH',
-            headers: {
-                'X-CSRF-Token': token,
-            },
-            body: new URLSearchParams({
-                title: title,
-            }),
-        })
+    //     fetch('/categories/' + postid + '/update', {
+    //         method: 'PATCH',
+    //         headers: {
+    //             'X-CSRF-Token': token,
+    //         },
+    //         body: new URLSearchParams({
+    //             title: title,
+    //         }),
+    //     })
 
-    })
+    // })
 
-    updateTitle.addEventListener('click', e => {
-        updateTitle.style.cursor = 'text';
-    })
+    // updateTitle.addEventListener('click', e => {
+    //     updateTitle.style.cursor = 'text';
+    // })
 })
 
 

@@ -16,8 +16,10 @@ return new class extends Migration
         Schema::create('recipes', function (Blueprint $table) {
 
             $table->id();
-            $table->string('body');
+            $table->string('name');
+            $table->string('body')->nullable();
             $table->string('file_path')->nullable();
+            $table->string('expiration')->nullable()->comment('trash_expiration_date');
             $table->timestamps();
             $table->softDeletes();
 

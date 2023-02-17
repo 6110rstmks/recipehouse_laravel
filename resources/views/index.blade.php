@@ -1,4 +1,4 @@
-<x-layout>
+<x-recipehouse>
     <x-slot name="left">
         <x-leftside :categories="$categories" />
     </x-slot>
@@ -13,15 +13,17 @@
         {{-- 左画面においてカテゴリが選択されていないとき、右画面のデフォルトカテゴリは登録カテゴリのうちidの一番大きいものを表示 --}}
         <span style="font-size: 20px; margin-left: 10px;">{{ $categories[0]->title }}</span>
 
-        <form method="post" action="{{ route('recipes.store', $categories[0]) }}" class="recipe-form" enctype="multipart/form-data">
+        <form method="post" action="{{ route('recipes.store', $categories[0]) }}" enctype="multipart/form-data">
             @csrf
             <p>add recipe</p>
-            <p><input type="text" name="body"></p>
-            @error('body')
+            <p class="mt-6"><input type="text" name="name"></p>
+
+            @error('name')
                 <div class="error">{{ $message }}</div>
             @enderror
-            <p><input type="file" name="image"></p>
-            <button>UPLOAD</button>
+
+            <p class="mt-5"><input type="file" name="image"></p>
+            <button class="mt-4">UPLOAD</button>
         </form>
 
         <hr>
@@ -29,15 +31,14 @@
         <ul style="margin-top: 15px;">
             @foreach ($categories[0]->recipes as $recipe)
                 <li>
-                    <a href="{{ route('recipes.show', $recipe) }}">{{ $recipe->body }}</a>
+                    <a class="underline" href="{{ route('recipes.show', $recipe) }}">{{ $recipe->name }}</a>
                     <form method="post" action="{{ route('recipes.destroy', $recipe) }}" class="delete-comment">
                         @method('DELETE')
                         @csrf
-                        <button>削除</button>
+                        <button class="inline-flex items-center h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">DELETE</button>
                     </form>
                 </li>
             @endforeach
         </ul>
-    {{-- @elseif ($categories->count() >= 2) --}}
     @endif
-</x-layout>
+</x-recipehouse>

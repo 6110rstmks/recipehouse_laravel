@@ -9,17 +9,26 @@
 </head>
 <body>
     <h1 class="text-red-800 text-2xl">Deleted recipes</h1>
-    @foreach ($deleted_recipes as $deleted_recipe)
-        <h3>
-            {{$deleted_recipe->body}}
-        </h3>
+    <p>Recipe is deleted in an month</p>
+    <div class="mt-5">
 
-        <form action="{{route('recipes.restore', $deleted_recipe)}}" method="POST">
-            @csrf
-            <button>restore recipe</button>
-        </form>
-    @endforeach
+        @foreach ($deleted_recipes as $deleted_recipe)
+            <h3>
+                {{$deleted_recipe->body}}
+            </h3>
 
-    <button class="bg-blue-500 hover:bg-blue-700 text-black py-1 px-2 rounded-full"><a class="text-xs" href="{{route('user.home')}}">MY PAGE</a></button>
+            <form action="{{route('recipes.restore', $deleted_recipe->id)}}" method="POST">
+                @csrf
+                <button class="text-xs bg-orange-500 hover:bg-blue-700 text-black py-1 px-2 rounded-full">
+                    restore recipe
+                </button>
+            </form>
+        @endforeach
+    </div>
+
+
+    <button class="mt-5 bg-blue-500 hover:bg-blue-700 text-black py-1 px-2 rounded-full">
+        <a class="text-xs" href="{{route('user.home')}}">MY PAGE</a>
+    </button>
 </body>
 </html>

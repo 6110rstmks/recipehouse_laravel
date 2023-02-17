@@ -6,7 +6,7 @@
     @csrf
     <button class="purge-category">purge</button>
 </form> --}}
-{{-- <span class="button is-success purge-category" style="margin-top: 12px;">purge</span> --}}
+<span class="btn is-success purge-category" style="margin-top: 12px;">purge</span>
 
 {{-- カテゴリを表示 --}}
 <ul class="category_ul">
@@ -17,7 +17,7 @@
         </div> --}}
 
         {{-- タイトルをajaxでupdateできる --}}
-        <input class="title-update" style="cursor: context-menu;" type="text" value="{{ $category->title}}" name="updateTitle" onfocus="this.select();" data-id="{{ $category->id }}">
+        <input class="cursor-text title-update"  type="text" value="{{ $category->title}}" name="updateTitle" onfocus="this.select();" data-id="{{ $category->id }}">
 
         <form action="{{ route('categories.destroy', $category)}}" method="POST">
             @csrf

@@ -1,4 +1,5 @@
-<form method="POST" action="{{ route('admin.register') }}">
+<x-layout>
+    <form method="POST" action="{{ route('admin.register') }}">
     @csrf
 
     <div>Email</div>
@@ -8,4 +9,5 @@
     <input type="password" name="password">
     <button>Submit</button>
 
-</form>
+    </form>
+</x-layout>
