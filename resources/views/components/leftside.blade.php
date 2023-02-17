@@ -29,7 +29,7 @@
             <div class="error">{{ $message }}</div>
         @enderror
 
-        <a class="show-category" href="{{ route('categories.show', $category) }}"><span style="font-size: 15px;">◀</span>recipe list<span style="font-size: 15px;">▶</span></a>
+        <a class="" href="{{ route('categories.show', $category) }}"><span style="font-size: 15px;">◀</span>Show Recipe<span style="font-size: 15px;">▶</span></a>
     </li>
     @empty
     <li>No categories yet!</li>

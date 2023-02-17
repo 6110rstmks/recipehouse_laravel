@@ -1,37 +1,42 @@
 <x-recipehouse>
     <x-slot name="left">
-        {{-- <x-leftside :posts="$posts" /> --}}
         <x-leftside :categories="$categories" />
     </x-slot>
 
         <!-- 画面右側 -->
     <!-- if there are any categories ,below html is rendered. -->
     {{-- if thre is no categories, right screen display nothing. --}}
-    <h1>*List*  {{ $category->title }}</h1>
+    <span class="icon">
+        <i class="fas fa-utensils fa-lg"></i>
+    </span>
+    <span>{{ $category->title }}</span>
 
     <form method="post" action="{{ route('recipes.store', $category) }}" class="task-form" enctype="multipart/form-data">
         @csrf
         <p>add recipe</p>
-        <input type="text" name="name">
+        <input class="mt-6" type="text" name="name">
 
-        @error('body')
+        @error('name')
             <div class="error">{{ $message }}</div>
         @enderror
 
         <p><input type="file" name="image"></p>
-        <button>UPLOAD</button>
+        <button class="mt-3 text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-3 py-1 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">UPLOAD</button>
     </form>
     <hr>
 
     <ul>
         @foreach ($category->recipes as $recipe)
             <li>
-                <a href="{{ route('recipes.show', $recipe) }}">{{ $recipe->name }}</a>
                 <form method="post" action="{{ route('recipes.destroy', $recipe) }}" class="delete-comment">
                     @method('DELETE')
                     @csrf
-                    <button class="btn">DELETE</button>
+                    <button class="mt-5 bg-blue-500 hover:bg-blue-700 text-black py-1 px-2 rounded-full">
+                        DELETE
+                    </button>
                 </form>
+                <a href="{{ route('recipes.show', $recipe) }}">{{ $recipe->name }}</a>
+
             </li>
         @endforeach
     </ul>

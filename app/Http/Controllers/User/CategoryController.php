@@ -43,7 +43,7 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request)
     {
-        $authenticated_user = Auth::user();
+        $auth_user = Auth::user();
 
         $category = new Category();
 
@@ -53,7 +53,7 @@ class CategoryController extends Controller
 
         // categories()にエラーがでてるけどちゃんとうまくpivot tableに格納されてる。
         // $authed_user->categories()->attach($category->id, ['recipe_id' => null]);
-        $authenticated_user->categories()->syncWithoutDetaching($category->id);
+        $auth_user->categories()->syncWithoutDetaching($category->id);
 
         return redirect()->route('categories.index');
 

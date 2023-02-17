@@ -24,7 +24,7 @@ class RecipeRequest extends FormRequest
     public function rules()
     {
         return [
-            'body' => 'required|min:3',
+            'name' => 'required|min:3',
             'image' => 'mimes:jpeg,png,gif,jpg',
         ];
     }
@@ -32,8 +32,8 @@ class RecipeRequest extends FormRequest
     public function messages()
     {
         return [
-            'body.required' => 'recipe title is required',
-            'body.min' => 'Please enter at least :min character',
+            'name.required' => 'recipe title is required',
+            'name.min' => 'Please enter at least :min character',
         ];
     }
 }

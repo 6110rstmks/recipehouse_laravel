@@ -8,26 +8,37 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    <h1 class="text-red-800 text-2xl">Deleted recipes</h1>
+    <h1 class="text-yellow-800 text-2xl">Deleted recipes</h1>
     <p>Recipe is deleted in an month</p>
     <div class="mt-5">
 
-        @foreach ($deleted_recipes as $deleted_recipe)
-            <h3>
-                {{$deleted_recipe->body}}
-            </h3>
+        <ul>
+            @foreach ($deleted_recipes as $deleted_recipe)
+            <a class="block max-w-sm p-6 bg-blue border border-gray-200 rounded-lg shadow hover:bg-blue-300 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-blue-700">
 
-            <form action="{{route('recipes.restore', $deleted_recipe->id)}}" method="POST">
-                @csrf
-                <button class="text-xs bg-orange-500 hover:bg-blue-700 text-black py-1 px-2 rounded-full">
-                    restore recipe
-                </button>
-            </form>
-        @endforeach
+                <form class="inline" action="{{route('recipes.restore', $deleted_recipe->id)}}" method="POST">
+                    @csrf
+                    <button class="text-xs bg-orange-500 hover:bg-blue-700 text-black py-1 px-2 rounded-full">
+                        Restore
+                    </button>
+                </form>
+                <span>
+                    {{$deleted_recipe->id}}
+                </span>
+                <span>
+                    {{$deleted_recipe->name}}
+                </span>
+                <span>
+                    {{$deleted_recipe->categories[0]->title}}
+                </span>
+            </a>
+            @endforeach
+
+        </ul>
     </div>
 
 
-    <button class="mt-5 bg-blue-500 hover:bg-blue-700 text-black py-1 px-2 rounded-full">
+    <button class="mt-5 bg-lime-200 hover:bg-lime-700 text-black py-1 px-2 rounded-full">
         <a class="text-xs" href="{{route('user.home')}}">MY PAGE</a>
     </button>
 </body>

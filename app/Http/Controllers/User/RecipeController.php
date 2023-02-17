@@ -35,6 +35,7 @@ class RecipeController extends Controller
      * save a recipe and sync it with a post
      */
     public function store(RecipeRequest $request, Category $category)
+    // public function store(Request $request, Category $category)
     {
         // countermeasure for multiple submission
 
@@ -82,19 +83,20 @@ class RecipeController extends Controller
     public function destroy(Recipe $recipe)
     {
 
-        // $recipe->postsをデバッグを使用してなんとかidをrouteに渡せたけども
+        // $recipe->categoriesをデバッグを使用してなんとかidをrouteに渡せたけども
         // これは正規のやり方ではないはず。
         //　正しいやり方はまた後で調べます。
 
-        $aaa = $recipe->categories[0];
+        $category = $recipe->categories[0];
 
         $recipe->delete();
 
-        Log::debug($aaa);
+        Log::debug($category);
 
-        return redirect()
-            ->route('categories.show', $aaa);
+        // return redirect()
+        //     ->route('categories.show', $category);
 
+        return back();
     }
 
     public function deletedList()

@@ -8,14 +8,16 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"><a href="{{route('user.home')}}">MY PAGE</a></button>
+    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+        <a href="{{route('user.home')}}">MY PAGE</a>
+    </button>
+
+    <a class="mt-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-1 border border-blue-500 hover:border-transparent" href="{{ route('recipes.list') }}">All Recipe</a>
+
     <div class="container" style="margin-top: 12px;">
 
         <div class="left-container">
             <hr>
-
-            <a class="mt-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-1 border border-blue-500 hover:border-transparent" href="{{ route('recipes.list') }}">recipe list is here</a>
-
 
             <p class="text-amber-500">Hello <span style="color: green">{{ Auth::user()->username }}</span></p>
             <div class="form-box">
@@ -28,7 +30,7 @@
                         <i class="fas fa-utensils"></i>
                     </span>
                     <input type="text" class="title-input" name="title" placeholder="entry category name" value="{{ old('title') }}">
-                    <button>ADD</button>
+                    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">ADD</button>
                 </form>
 
                 @error('title')
@@ -36,6 +38,7 @@
                 @enderror
 
             </div>
+
             <div class="category-box">
                 {{ $left }}
             </div>

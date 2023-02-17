@@ -20,12 +20,12 @@
 
     @guest
         <p>You can add recipes if you sign in</p>
-        <button><a href="{{ route('login_form') }}">sign in form from here</a></button>
+        <button><a href="{{ route('login_form') }}">Sign in</a></button>
     @endguest
 
     @auth
         <button class="inline-flex items-center h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">
-            <a href="{{ route('user.home') }}">mypage from here</a>
+            <a href="{{ route('user.home') }}">MyPage</a>
         </button>
     @endauth
 
