@@ -23,7 +23,13 @@
             @enderror
 
             <p class="mt-5"><input type="file" name="image"></p>
-            <button class="mt-4">UPLOAD</button>
+            <button class="mt-3 text-white bg-purple-700
+                hover:bg-purple-800 focus:outline-none focus:ring-4
+                focus:ring-purple-300 font-medium rounded-full text-sm
+                px-3 py-1 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700
+                dark:focus:ring-purple-900">
+                UPLOAD
+            </button>
         </form>
 
         <hr>
@@ -35,7 +41,12 @@
                     <form method="post" action="{{ route('recipes.destroy', $recipe) }}" class="delete-comment">
                         @method('DELETE')
                         @csrf
-                        <button class="inline-flex items-center h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">DELETE</button>
+                        <button class="inline-flex items-center
+                            h-8 px-4 m-2 text-sm text-indigo-100 transition-colors
+                            duration-150 bg-indigo-700 rounded-lg
+                            focus:shadow-outline hover:bg-indigo-800">
+                            DELETE
+                        </button>
                     </form>
                 </li>
             @endforeach

@@ -8,11 +8,20 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-        <a href="{{route('user.home')}}">MY PAGE</a>
-    </button>
+    <div class="mt-3">
+        <button class="bg-transparent hover:bg-blue-500 text-blue-700
+        font-semibold hover:text-white py-2 px-4 border
+        border-blue-500 hover:border-transparent rounded">
+            <a href="{{route('user.home')}}">MY PAGE</a>
+        </button>
 
-    <a class="mt-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-1 border border-blue-500 hover:border-transparent" href="{{ route('recipes.list') }}">All Recipe</a>
+        <a class="ml-6 mt-4 bg-transparent hover:bg-blue-500 rounded
+            text-blue-700 font-semibold hover:text-white text-xl
+            py-2 px-4 border border-blue-500 hover:border-transparent"
+            href="{{ route('recipes.list') }}">
+            All Recipe
+        </a>
+    </div>
 
     <div class="container" style="margin-top: 12px;">
 
@@ -30,7 +39,9 @@
                         <i class="fas fa-utensils"></i>
                     </span>
                     <input type="text" class="title-input" name="title" placeholder="entry category name" value="{{ old('title') }}">
-                    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">ADD</button>
+                    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                        ADD
+                    </button>
                 </form>
 
                 @error('title')
@@ -50,5 +61,5 @@
     </div>
 </body>
 </html>
-<script src="{{ url('js/main.js') }}"></script>
+<script src="{{ url('js/recipehouse.js') }}"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>

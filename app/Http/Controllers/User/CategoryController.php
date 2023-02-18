@@ -24,12 +24,12 @@ class CategoryController extends Controller
     }
 
     /**
-     *
+     *　カテゴリが選択された状態でのrecipehouse page
      */
     public function show(Category $category)
     {
+        Log::info('ukon');
         $authenticated_user = Auth::user();
-
 
         $categories = $authenticated_user->categories;
 
@@ -55,7 +55,7 @@ class CategoryController extends Controller
         // $authed_user->categories()->attach($category->id, ['recipe_id' => null]);
         $auth_user->categories()->syncWithoutDetaching($category->id);
 
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.show', $category);
 
         // return response()->json(['id' => Category::max('id')]);
 

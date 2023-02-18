@@ -86,19 +86,14 @@ class RecipeController extends Controller
         // $recipe->categoriesをデバッグを使用してなんとかidをrouteに渡せたけども
         // これは正規のやり方ではないはず。
         //　正しいやり方はまた後で調べます。
-
-        $category = $recipe->categories[0];
-
+        $recipe->expiration = now()->addMinutes(2);
+        $recipe->save();
         $recipe->delete();
-
-        Log::debug($category);
-
-        // return redirect()
-        //     ->route('categories.show', $category);
 
         return back();
     }
 
+    // trash page
     public function deletedList()
     {
         $deleted_recipes = Recipe::onlyTrashed()->get();

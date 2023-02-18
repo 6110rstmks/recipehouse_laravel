@@ -7,6 +7,11 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+
+    protected $commands = [
+        Commands\WriteLog::Class,
+    ];
+
     /**
      * Define the application's command schedule.
      *
@@ -15,7 +20,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // $schedule->call(new \App\ForceDeleteRecipe($schedule))->everyMinute();
+        $schedule->command('writelog')->everyMinute();
+        // $schedule->command('writelog');
     }
 
     /**
