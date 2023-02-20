@@ -41,10 +41,7 @@
                     <form method="post" action="{{ route('recipes.destroy', $recipe) }}" class="delete-comment">
                         @method('DELETE')
                         @csrf
-                        <button class="inline-flex items-center
-                            h-8 px-4 m-2 text-sm text-indigo-100 transition-colors
-                            duration-150 bg-indigo-700 rounded-lg
-                            focus:shadow-outline hover:bg-indigo-800">
+                        <button class="inline-flex btn btn-blue">
                             DELETE
                         </button>
                     </form>

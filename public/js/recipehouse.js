@@ -6,7 +6,7 @@ const deletes = document.querySelectorAll('.delete');
 const uptos = document.querySelectorAll('.upChange');
 const downtos = document.querySelectorAll('.downChange');
 const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-const addTitle = document.querySelector('.title-input');
+const addTitle = document.querySelector('title-input');
 const updateTitles = document.querySelectorAll('.title-update');
 
 const noLi = document.createElement('li');

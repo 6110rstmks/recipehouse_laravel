@@ -39,7 +39,7 @@
                         <i class="fas fa-utensils"></i>
                     </span>
                     <input type="text" class="title-input" name="title" placeholder="entry category name" value="{{ old('title') }}">
-                    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    <button class="btn-d">
                         ADD
                     </button>
                 </form>
@@ -50,7 +50,8 @@
 
             </div>
 
-            <div class="category-box">
+            <div>
+                <hr>
                 {{ $left }}
             </div>
         </div>

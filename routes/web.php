@@ -186,5 +186,4 @@ Route::group([
     Route::get('/history/list', [Admin\UserController::class, 'historyList'])
     ->name('histories.list');
 
-
 });

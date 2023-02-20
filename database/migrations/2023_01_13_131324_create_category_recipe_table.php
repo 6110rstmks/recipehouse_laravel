@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('category_id')->unsigned();
             $table->bigInteger('recipe_id')->unsigned();
 
+            // foreignの第二引数は制約名
             $table->foreign('category_id', 'category_recipeTable_categoryId')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('recipe_id', 'category_recipeTable_recipeId')->references('id')->on('recipes')->onDelete('cascade');
         });

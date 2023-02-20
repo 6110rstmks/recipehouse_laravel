@@ -14,21 +14,23 @@
 
         <ul>
             @foreach ($deleted_recipes as $deleted_recipe)
-            <a class="relative block max-w-sm p-9 bg-gray-500 border border-black-200 rounded-lg shadow hover:bg-gray-600 dark:bg-blue-400 dark:border-gray-700 dark:hover:bg-yellow-700">
+            <a class="relative block max-w-sm p-9
+                bg-gray-500 border border-black-200
+                rounded-lg shadow hover:bg-gray-600
+                dark:bg-blue-400 dark:border-gray-700
+                dark:hover:bg-yellow-700"
+                href="{{ route('recipes.show', $deleted_recipe) }}">
 
-                {{-- <span class="absolute inset-0 border rounded-t"> --}}
                 <span class="absolute top-0 left-0 border rounded-t">
                     {{$deleted_recipe->categories[0]->title}}
                 </span>
                 <form class="inline" action="{{route('recipes.restore', $deleted_recipe->id)}}" method="POST">
                     @csrf
-                    <button class="absolute top-0 right-0 text-xs bg-blue-400 hover:bg-blue-700 text-black py-1 px-2 rounded-full">
+                    <button class="absolute top-0 right-0 text-xs
+                        bg-blue-400 hover:bg-blue-700 text-black py-1 px-2 rounded-full">
                         Restore
                     </button>
                 </form>
-                {{-- <span>
-                    {{$deleted_recipe->id}}
-                </span> --}}
 
                 <span class="absolute top-6 left-4">
                     {{$deleted_recipe->name}}
