@@ -18,11 +18,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('body')->nullable();
+            $table->integer('user_id')->unsigned();
             $table->string('file_path')->nullable();
             $table->string('expiration')->nullable()->comment('trash_expiration_date');
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 

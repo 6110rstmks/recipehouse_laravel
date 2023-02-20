@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="mt-4 ml-4">
+    <div id="nowuserid" data-nowuserid={{Auth::user()->id}} class="mt-4 ml-4">
 
         <h1 class="text-3xl">Recipe List</h1>
 
@@ -14,18 +14,21 @@
             </tr>
             <tr>
                 <td class="border border-slate-300">{{$recipe->id}}</td>
-                <td class="border border-slate-300"><a href="{{route('recipes.show', $recipe)}}">{{$recipe->name}}</a></td>
+                <td class="border border-slate-300">
+                    <a class="user_id" data-userid={{$recipe->user_id}}
+                        href="{{route('recipes.show', $recipe)}}">{{$recipe->name}}
+                    </a>
+                </td>
+
+                {{-- jsでポイント消費するけどいいです？のダイアログだしたいねんけどうまくいかん、ので保留 --}}
+                {{-- <td class="border border-slate-300"><a class="user_id" data-userid={{$recipe->user_id}}>{{$recipe->name}}</a></td> --}}
                 <td class="border border-slate-300">
                     @foreach ($recipe->categories as $category)
                         {{$category->title}}
                     @endforeach
                 </td>
                 <td class="border border-slate-300">
-                    @foreach ($recipe->categories as $category)
-                        @foreach ($category->users as $user)
-                            by {{$user->username}}
-                        @endforeach
-                    @endforeach
+                    by {{$recipe->user->username}}
                 </td>
             </tr>
 
@@ -44,6 +47,7 @@
                 <a href="{{ route('user.home') }}">MyPage</a>
             </button>
         @endauth
+        <a class="btn-d" href="{{route('recipes.deletedList')}}">Deleted Recipe</a>
 
         {{-- <form action="{{ route('recipes.store',) }}" method="POST">
             <select name="" id="">
@@ -55,6 +59,9 @@
             </select>
         </form> --}}
     </div>
+
+    <script src="{{ url('js/recipelist.js') }}"></script>
+
 
 
 </x-layout>

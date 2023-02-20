@@ -23,4 +23,9 @@ class Recipe extends Model
         return $this->belongsToMany(Category::class, 'category_recipe');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+
+    }
 }

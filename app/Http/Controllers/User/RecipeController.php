@@ -8,6 +8,8 @@ use App\Http\Requests\RecipeRequest;
 use App\Models\Category;
 use App\Models\Recipe;
 use Illuminate\Support\Facades\Log;
+use illuminate\Support\Facades\Auth;
+
 
 class RecipeController extends Controller
 {
@@ -27,6 +29,15 @@ class RecipeController extends Controller
 
     public function show(Recipe $recipe)
     {
+        $now_sign_in_user_id = Auth::user()->id;
+
+        if ($now_sign_in_user_id !== $recipe->user_id)
+        {
+            Log::info('ume');
+            Auth::user()->point = Auth::user()->point - 300;
+            Auth::user()->save();
+        }
+
         return view('recipes.show')
             ->with(['recipe' => $recipe]);
     }
@@ -35,11 +46,8 @@ class RecipeController extends Controller
      * save a recipe and sync it with a post
      */
     public function store(RecipeRequest $request, Category $category)
-    // public function store(Request $request, Category $category)
     {
         // countermeasure for multiple submission
-
-        Log::debug('souzai');
 
         $request->session()->regenerateToken();
 
@@ -65,6 +73,10 @@ class RecipeController extends Controller
             $recipe->file_path = $file_name;
         }
 
+        $recipe->body = $request->body;
+
+        $recipe->user_id = Auth::user()->id;
+
 
         $recipe->save();
 
@@ -86,8 +98,11 @@ class RecipeController extends Controller
         // $recipe->categoriesをデバッグを使用してなんとかidをrouteに渡せたけども
         // これは正規のやり方ではないはず。
         //　正しいやり方はまた後で調べます。
+
+        // setting time to forcedelete 2 minutes after レシピのtrashed pageから2分後に物理削除するための時間を設定
         $recipe->expiration = now()->addMinutes(2);
         $recipe->save();
+
         $recipe->delete();
 
         return back();
