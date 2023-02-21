@@ -1,33 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login form</title>
-    <link href={{ asset('css/app.css') }} rel="stylesheet">
-</head>
-
-<body>
-    <script src="{{ asset('js/app.js') }}"></script>
-    <a href="{{ route('register_page') }}"><button>user registration is here</button></a>
-    <a href="{{ route('recipes.list') }}"><button>recipe list is here</button></a>
+<x-layout>
+    <a class="border-2 px-2 py-1 rounded-xl" href="{{ route('register_form') }}">Sign up</a>
+    <a class="ml-4 border-2 px-2 py-1 rounded-xl" href="{{ route('recipes.list') }}">Recipe List</a>
 
     @if (session('login_error'))
-        <div class="alert alert-success" style="color: red">
+        <div style="color: red">
             {{ session('login_error') }}
         </div>
     @endif
 
-    @if (session('logout_msg'))
+    @if (session('signout_msg'))
         <div class="alert alert-success">
-            {{ session('logout_msg') }}
+            {{ session('signout_msg') }}
         </div>
     @endif
 
     <div style="margin:0 auto; width: 500px;">
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <h1 class="text-2xl h3 mb-3 font-weight-normal">Please sign in</h1>
         <form class="form-signin" method="POST" action="{{ route('login') }}">
             @csrf
 
@@ -53,12 +42,11 @@
 
             <input type="checkbox" name="remember_me" value="true">
 
-            <button style="display: block" type="submit">Login in</button>
+            <button class="btn-c" type="submit">Login in</button>
         </form>
 
-        <a href="{{ route('password-reset-page') }}">Are you forgetting your password?</a>
+        <a class="underline" href="{{ route('password-reset-page') }}">Are you forgetting your password?</a>
 
     </div>
 
-</body>
-</html>
+</x-layout>

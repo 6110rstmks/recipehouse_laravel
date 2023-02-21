@@ -9,8 +9,7 @@
         {{-- <div class="title-container" style="margin-top: 30px">
             <span class="delete" style="margin-right: 10px" data-id="{{ $category->id }}">x</span>
         </div> --}}
-        <a class="block" href="{{ route('categories.show', $category) }}"><span style="font-size: 15px;">◀</span>Show Recipe<span style="font-size: 15px;">▶</span></a>
-
+        <a class="block text-lg" href="{{ route('categories.show', $category) }}"><span class="text-sm">◀</span>Show Recipe▶</a>
 
         {{-- タイトルをajaxでupdateできる --}}
         {{-- bg-inheritでテキストフォームのbackground-colorを同化させている --}}
@@ -18,10 +17,10 @@
             value="{{ $category->title}}" name="updateTitle"
             onfocus="this.select();" data-id="{{ $category->id }}">
 
-        <form action="{{ route('categories.destroy', $category)}}" method="POST">
+        <form class="inline" action="{{ route('categories.destroy', $category)}}" method="POST">
             @csrf
             @method('DELETE')
-            <button class="btn-d">
+            <button class="btn-e">
                 <i class="fa fa-trash" aria-hidden="true"></i>
             </button>
         </form>
@@ -29,11 +28,14 @@
         @error('update-title')
             <div class="error">{{ $message }}</div>
         @enderror
-
     </li>
     @empty
     <li>No categories yet!</li>
     @endforelse
+
+    <div>
+        {{ $categories->links('pagination.default') }}
+    </div>
 </ul>
 
 

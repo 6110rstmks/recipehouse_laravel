@@ -16,7 +16,7 @@
                 <td class="border border-slate-300">{{$recipe->id}}</td>
                 <td class="border border-slate-300">
                     <a class="user_id" data-userid={{$recipe->user_id}}
-                        href="{{route('recipes.show', $recipe)}}">{{$recipe->name}}
+                        href="{{route('recipes.showFromList', $recipe)}}">{{$recipe->name}}
                     </a>
                 </td>
 
@@ -35,6 +35,17 @@
             @endforeach
         </table>
 
+        {{-- @if($errors->any())
+            <h4>{{$errors->first()}}</h4>
+        @endif --}}
+
+        @if ($errors->any())
+
+            @foreach($errors->all() as $error)
+                <div style="color: red">{{ $error }}</div>
+            @endforeach
+        @endif
+
         {{ $recipes->links('pagination.default') }}
 
         @guest
@@ -43,9 +54,7 @@
         @endguest
 
         @auth
-            <button class="inline-flex items-center h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">
-                <a href="{{ route('user.home') }}">MyPage</a>
-            </button>
+            <a class="btn-d" href="{{ route('user.home') }}">MyPage</a>
         @endauth
         <a class="btn-d" href="{{route('recipes.deletedList')}}">Deleted Recipe</a>
 

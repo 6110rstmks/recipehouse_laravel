@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
         $authenticated_user = Auth::user();
 
-        $categories = $authenticated_user->categories;
+        $categories = $authenticated_user->categories->paginate(3);
 
         return view('index')
             ->with(['categories' => $categories]);
@@ -31,7 +31,7 @@ class CategoryController extends Controller
         Log::info('ukon');
         $authenticated_user = Auth::user();
 
-        $categories = $authenticated_user->categories;
+        $categories = $authenticated_user->categories->paginate(3);
 
 
         return view('categories.show')

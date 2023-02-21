@@ -29,17 +29,24 @@ class RecipeController extends Controller
 
     public function show(Recipe $recipe)
     {
+
+        return view('recipes.show')
+            ->with(['recipe' => $recipe]);
+    }
+
+    public function showFromList(Recipe $recipe)
+    {
         $now_sign_in_user_id = Auth::user()->id;
 
         if ($now_sign_in_user_id !== $recipe->user_id)
         {
-            Log::info('ume');
             Auth::user()->point = Auth::user()->point - 300;
             Auth::user()->save();
         }
 
         return view('recipes.show')
             ->with(['recipe' => $recipe]);
+
     }
 
     /**

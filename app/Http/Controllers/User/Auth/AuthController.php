@@ -8,6 +8,7 @@ use App\Http\Requests\LoginFormRequest;
 use illuminate\Support\Facades\Auth;
 use App\Models\User;
 // use Illuminate\Support\Facades\Log;
+use Log;
 use Illuminate\Auth\Events\Login;
 
 
@@ -117,6 +118,16 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('login_form')->with('logout_msg', 'logout is done.');
+        return redirect()->route('login_form')->with('signout_msg', 'Sign out is done.');
+    }
+
+    public function delete(Request $request)
+    {
+        // Log::debug(Auth::guard('web'));
+
+        Auth::user()->delete();
+
+        return redirect()->route('register_form')->with('delete_user_msg', 'Deleting account is done.');
+
     }
 }

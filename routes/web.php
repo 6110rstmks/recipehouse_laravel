@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin;
 
 // ユーザ作成画面
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])
-    ->name('register_page');
+    ->name('register_form');
 
 // ユーザ作成処理
 Route::post('/register', [RegisterController::class, 'register'])
@@ -26,10 +26,16 @@ Route::post('/register', [RegisterController::class, 'register'])
 Route::get('/recipes/list', [RecipeController::class, 'list'])
     ->name('recipes.list');
 
-// detailed page
+// recipe detailed page
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])
     ->name('recipes.show')
     ->where('recipe', '[0-9]+');
+
+// recipe detailed page from list page
+Route::get('/recipes/list/{recipe}', [RecipeController::class, 'showFromList'])
+    ->name('recipes.showFromList')
+    ->where('recipe', '[0-9]+')
+    ->middleware('other_recipe');
 
 
 Route::group(['middleware' => ['guest:web']], function() {
@@ -99,12 +105,16 @@ Route::group([
         return view('user.home');
     })->name('user.home');
 
-    // logout
+    // sign out
 
-    Route::post('logout', [App\Http\Controllers\User\Auth\AuthController::class, 'logout'])
+    Route::post('sign_out', [App\Http\Controllers\User\Auth\AuthController::class, 'logout'])
     // Route::post('logout', [Auth\AuthController::class, 'logout'])
     // ↑だとエラーになる。Auth\からはじまる完全修飾名として認識されているようです。
-        ->name('logout');
+        ->name('sign_out');
+
+    // delete account
+    Route::post('delete_member', [App\Http\Controllers\User\Auth\AuthController::class, 'delete'])
+        ->name('delete_user');
 
 
     // categoryに紐付けたrecipeを追加

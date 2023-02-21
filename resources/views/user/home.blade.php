@@ -13,17 +13,19 @@
 
         </div>
         <div class="flex">
-            <form action="{{ route('logout') }}" method="POST">
+            <form action="{{ route('sign_out') }}" method="POST">
             @csrf
-                <button class="btn-d text-red-200"><a href="{{route('recipes.deletedList')}}">
-                    Sign Out
+                <button class="btn-d text-red-200">
+                        Sign Out
                 </button>
             </form>
 
             <div>
-                <button class="inline-flex items-center h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800"><a href="{{route('recipes.deletedList')}}">
-                    <a href="{{route('categories.index')}}">Delete Account</a>
-                </button>
+
+                <form action="{{route('delete_user')}}" method="POST">
+                    @csrf
+                    <button class="btn-d">Delete Account</button>
+                </form>
             </div>
         </div>
 
@@ -31,12 +33,12 @@
             {{-- class="bg-transparent hover:bg-blue-500
             text-blue-700 font-semibold hover:text-white
             py-2 px-4 border border-blue-500 hover:border-transparent rounded"> --}}
-            class="btn-b">
+            class="btn-d">
             purge
         </span>
 
         <button class="inline-flex items-center h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">
-            <a href="{{ route('register_page') }}">New Sign Up</a>
+            <a href="{{ route('register_form') }}">New Sign Up</a>
         </button>
 
         <div class="mt-6">
@@ -56,7 +58,7 @@
                 </button>
             </div>
 
-            <button class="btn-blue">
+            <button class="btn-d">
                 <a href="{{route('recipes.list')}}">Recipe List</a>
             </button>
 

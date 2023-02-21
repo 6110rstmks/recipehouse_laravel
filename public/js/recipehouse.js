@@ -6,7 +6,7 @@ const deletes = document.querySelectorAll('.delete');
 const uptos = document.querySelectorAll('.upChange');
 const downtos = document.querySelectorAll('.downChange');
 const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-const addTitle = document.querySelector('title-input');
+const addTitle = document.querySelector('.category-input');
 const updateTitles = document.querySelectorAll('.title-update');
 
 const noLi = document.createElement('li');
@@ -142,6 +142,7 @@ updateTitles.forEach(updateTitle => {
 
     updateTitle.addEventListener('blur', () => {
         const title = updateTitle.value;
+        console.log('umaruko')
 
         fetch('/categories/' + postid + '/update', {
             method: 'PATCH',
@@ -154,10 +155,6 @@ updateTitles.forEach(updateTitle => {
         })
 
     })
-
-    // updateTitle.addEventListener('click', e => {
-    //     updateTitle.style.cursor = 'text';
-    // })
 })
 
 

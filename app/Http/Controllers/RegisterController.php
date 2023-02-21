@@ -28,7 +28,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        // パスワードリセットを行うための認証コード入力画面リロードを行うとユーザ作成ページへ飛ばされる。
+        // パスワードリセットを行うための認証コード入力画面にてリロードを行うとユーザ作成ページへ飛ばされる。
         // その際にPasswordResetControllerで設定していたフラグを削除する。
         Session::forget('password_reset_flg');
 

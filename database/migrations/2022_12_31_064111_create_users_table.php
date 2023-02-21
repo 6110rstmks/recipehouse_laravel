@@ -19,10 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('pricing_plan')->default(0)->comment('有料会員');
-            $table->string('point')->default(500)->comment('所有ポイント');
+            $table->integer('point')->default(500)->comment('所有ポイント');
             $table->tinyInteger('locked_flg')->default(0);
             $table->integer('error_count')->unsigned()->default(0);
             $table->integer('auth_code')->nullable()->comment('auth_code for password resetting');
+            $table->string('expiration')->nullable()->comment('trash_expiration_date');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

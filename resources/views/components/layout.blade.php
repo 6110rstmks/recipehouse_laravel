@@ -7,7 +7,7 @@
     @vite('resources/css/app.css')
 </head>
 <html>
-    <body>
+    <body class="ml-4 mt-4 font-serif">
         {{$slot}}
     </body>
 </html>
