@@ -35,16 +35,20 @@ class RecipeController extends Controller
 
     public function showFromList(Recipe $recipe)
     {
-        $now_sign_in_user_id = Auth::user()->id;
+        $previous = session()->get('_previous');
 
+        $previous_page_url_number = substr($previous['url'], -1);
 
+        $now_authenticated_user_id = Auth::user()->id;
 
-        // 他人の作成したレシピを閲覧した際にポイント消費する。
+        // consume points when viewing other's recipe
         // レシピ作成者以外の人がそのレシピを閲覧した場合、viewカウント(目のマーク)を増やす
 
-        if ($now_sign_in_user_id !== $recipe->user_id)
+        if ($now_authenticated_user_id !== $recipe->user_id
+
+        )
         {
-            Auth::user()->point = Auth::user()->point - 100;
+            Auth::user()->point = Auth::user()->point - config('recipe.options.consumption_point');
             Auth::user()->save();
 
             $recipe->view = $recipe->view + 1;
@@ -52,7 +56,10 @@ class RecipeController extends Controller
         }
 
         return view('recipes.show')
-            ->with(['recipe' => $recipe]);
+            ->with([
+                'recipe' => $recipe,
+                'previous_page_url_number' => $previous_page_url_number
+            ]);
 
     }
 

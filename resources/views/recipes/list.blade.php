@@ -8,6 +8,8 @@
 
         <h1 class="text-3xl">Recipe List</h1>
 
+        <span>Your point :{{Auth::user()->point}}</span>
+
         <table class="border-collapse border border-slate-400">
             @foreach ($recipes as $recipe)
             <tr>
