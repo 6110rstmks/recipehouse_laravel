@@ -40,8 +40,8 @@
                     <form method="post" action="{{ route('recipes.destroy', $recipe) }}" class="delete-comment">
                         @method('DELETE')
                         @csrf
-                        <button class="inline-flex btn btn-blue">
-                            DELETE
+                        <button class="text-[12px] inline-flex btn btn-blue">
+                            Delete
                         </button>
                     </form>
                     <a class="underline" href="{{ route('recipes.show', $recipe) }}">{{ $recipe->name }}</a>

@@ -116,7 +116,7 @@ class RecipeController extends Controller
         $category->recipes()->syncWithoutDetaching($recipe->id);
 
         return redirect()
-            ->route('categories.show', $category);
+            ->route('recipes.show', $recipe);
     }
 
     /**

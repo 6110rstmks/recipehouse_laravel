@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\CategoryController;
 use App\Http\Controllers\User\RecipeController;
+use App\Http\Controllers\User\TagController;
 
 
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\TagController;
 
 use App\Http\Controllers\User\Auth;
 use App\Http\Controllers\Admin;
@@ -32,13 +32,6 @@ Route::get('/recipes/show/{recipe}', [RecipeController::class, 'showFromList'])
     ->name('recipes.showFromList')
     ->where('recipe', '[0-9]+')
     ->middleware('other_recipe');
-
-
-// recipe detailed page
-Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])
-    ->name('recipes.show')
-    ->where('recipe', '[0-9]+');
-
 
 
 Route::group(['middleware' => ['guest:web']], function() {
@@ -119,6 +112,11 @@ Route::group([
     Route::post('delete_member', [App\Http\Controllers\User\Auth\AuthController::class, 'delete'])
         ->name('delete_user');
 
+    // recipe detailed page
+    Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])
+        ->name('recipes.show')
+        ->where('recipe', '[0-9]+');
+
 
     // categoryに紐付けたrecipeを追加
     Route::post('/store/{category}recipes', [RecipeController::class, 'store'])
@@ -181,8 +179,10 @@ Route::group([
     });
 
     Route::group(['prefix' => 'tags', 'as' => 'tags.'], function() {
-        Route::post('/store', [TagController::class, 'store'])
-            ->name('store');
+        Route::post('/store/{recipe}', [TagController::class, 'store'])
+            ->name('store')
+            ->where('recipe', '[0-9]+');
+
     });
 
 });

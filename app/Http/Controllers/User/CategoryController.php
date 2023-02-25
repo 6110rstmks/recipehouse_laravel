@@ -32,7 +32,6 @@ class CategoryController extends Controller
 
         $categories = $authenticated_user->categories->paginate(3);
 
-
         return view('categories.show')
             ->with([
                 'category' => $category,
