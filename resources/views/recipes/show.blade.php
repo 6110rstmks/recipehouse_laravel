@@ -10,6 +10,8 @@
         <img class="mt-6" width=380 src="{{ asset('storage/'. $recipe->file_path) }}">
     @endif
 
+    <i class="fa fa-eye" style="font-size: 15px"></i><span>{{$recipe->view}}</span>
+
     <button class="btn-blue" onclick="history.back()">前に戻る</button>
 
 

@@ -3,8 +3,8 @@
 
         <h2 class="text-3xl">MY PAGE</h2>
 
-        <div class="flex">
-            <p class="text-2xl mr-3">Hello <span class="text-cyan-100">{{Auth::user()->username}}</span></p>
+        <div class="mt-4 flex">
+            <p class="text-xl mr-3">Hello <span class="text-cyan-100">{{Auth::user()->username}}</span></p>
 
             <div>
                 <p>your point: {{Auth::user()->point}}</p>

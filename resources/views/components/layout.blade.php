@@ -12,3 +12,5 @@
     </body>
 </html>
 <script src="{{ url('js/main.js') }}"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+

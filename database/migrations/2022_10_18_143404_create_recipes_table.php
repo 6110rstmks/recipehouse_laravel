@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('file_path')->nullable();
             $table->string('expiration')->nullable()->comment('trash_expiration_date');
+            $table->integer('view')->default(0)->comment('counting page view');
             $table->timestamps();
             $table->softDeletes();
         });

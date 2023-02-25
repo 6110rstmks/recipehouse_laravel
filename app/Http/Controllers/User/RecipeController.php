@@ -19,7 +19,6 @@ class RecipeController extends Controller
         $recipes = Recipe::paginate(5);
         $categories = Category::latest()->get();
 
-
         return view('recipes.list')
             ->with([
                 'recipes' => $recipes,
@@ -38,10 +37,18 @@ class RecipeController extends Controller
     {
         $now_sign_in_user_id = Auth::user()->id;
 
+
+
+        // 他人の作成したレシピを閲覧した際にポイント消費する。
+        // レシピ作成者以外の人がそのレシピを閲覧した場合、viewカウント(目のマーク)を増やす
+
         if ($now_sign_in_user_id !== $recipe->user_id)
         {
-            Auth::user()->point = Auth::user()->point - 300;
+            Auth::user()->point = Auth::user()->point - 100;
             Auth::user()->save();
+
+            $recipe->view = $recipe->view + 1;
+            $recipe->save();
         }
 
         return view('recipes.show')
@@ -126,7 +133,7 @@ class RecipeController extends Controller
 
     }
 
-    // public function restore(Recipe $recipe)
+    // 削除したレシピを復活
     public function restore($recipeId)
     {
         Log::info($recipeId);

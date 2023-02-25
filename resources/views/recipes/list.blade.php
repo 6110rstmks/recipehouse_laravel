@@ -1,5 +1,10 @@
 <x-layout>
-    <div id="nowuserid" data-nowuserid={{Auth::user()->id}} class="mt-4 ml-4">
+    @if (auth()->check())
+        <div id="nowuserid" data-nowuserid={{Auth::user()->id}} class="mt-4 ml-4">
+    @else
+        <div id="nowuserid" class="mt-4 ml-4">
+
+    @endif
 
         <h1 class="text-3xl">Recipe List</h1>
 

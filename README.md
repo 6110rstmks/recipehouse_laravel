@@ -1,7 +1,3 @@
-When doing CRUD across multiple pages like this time,
-implementing ajax with vanilla js without vue.js will be full of bugs.
-So I don't implement ajax in laravel-recipehouse.
-
 ## about database
 a pivot table is composite key(category_id, recipe_id, user_id)
 I dared to configure db without foreign key constraint.
@@ -12,12 +8,23 @@ pagination
 many-to-many(user-category-recipe)
 
 レシピ一覧リストにおいて、ajaxのdeleteができる（☓ボタンが表示される）（自分が作成したレシピの場合）
-管理者の場合、pruneができる。
+管理者はpruneができる。
 
-レシピ一覧リストからカテゴリを選択してレシピをajaxで追加することができる。（ログイン時のみレシピを登録できるようにする）
+レシピ一覧リストからカテゴリを選択(ajaxで取得)してレシピをajaxで追加することができる。（ログイン時のみレシピを登録できる）
+
+
 
 # authentication
 
 reset-mail for forgetting-password
+
+## recipelist
+
+足跡機能
+あるユーザがレシピを閲覧するとカウントが1増える。
+5分以内に同じユーザが再度レシピを見ても（リロードや、ページをまたいで再びレシピを閲覧）カウントは増えない。
+
+自身のレシピを閲覧してもカウントは増えない。
+
 
 
