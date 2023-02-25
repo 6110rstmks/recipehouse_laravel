@@ -2,10 +2,11 @@
 a pivot table is composite key(category_id, recipe_id, user_id)
 I dared to configure db without foreign key constraint.
 
+table(category, recipe, user, tag)
+
 ## functional requirement
 
 pagination
-many-to-many(user-category-recipe)
 
 レシピ一覧リストにおいて、ajaxのdeleteができる（☓ボタンが表示される）（自分が作成したレシピの場合）
 管理者はpruneができる。
@@ -32,4 +33,10 @@ reset-mail for forgetting-password
 ### ポイント消費、有料会員
 
 消費ポイントはconfig/recipe.phpに記載
+
+### recipehouse
+
+カテゴリ変更機能
+
+
 

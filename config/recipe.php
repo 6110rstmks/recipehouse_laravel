@@ -2,6 +2,6 @@
 
 return [
     'options' => [
-        'consumption_point' => 50,
+        'consumption_point' => 1,
     ]
 ];

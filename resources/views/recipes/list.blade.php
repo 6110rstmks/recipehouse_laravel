@@ -8,10 +8,11 @@
 
         <h1 class="text-3xl">Recipe List</h1>
 
-        <span>Your point :{{Auth::user()->point}}</span>
+        @auth
+            <span>Your point :{{Auth::user()->point}}</span>
+        @endauth
 
         <table class="border-collapse border border-slate-400">
-            @foreach ($recipes as $recipe)
             <tr>
 
                 <th class="border border-slate-300">ID</th>
@@ -19,6 +20,7 @@
                 <th class="border border-slate-300">Category</th>
                 <th class="border border-slate-300">User</th>
             </tr>
+            @foreach ($recipes as $recipe)
             <tr>
                 <td class="border border-slate-300">{{$recipe->id}}</td>
                 <td class="border border-slate-300">
@@ -35,7 +37,11 @@
                     @endforeach
                 </td>
                 <td class="border border-slate-300">
-                    by {{$recipe->user->username}}
+                    @if (is_null($recipe->user))
+                        by 退会したユーザ
+                    @else
+                        by {{$recipe->user->username}}
+                    @endif
                 </td>
             </tr>
 

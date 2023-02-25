@@ -13,16 +13,14 @@ use illuminate\Support\Facades\Auth;
 
 class RecipeController extends Controller
 {
-
     public function list()
     {
         $recipes = Recipe::paginate(5);
-        $categories = Category::latest()->get();
 
         return view('recipes.list')
             ->with([
                 'recipes' => $recipes,
-                'categories' => $categories,
+                // 'categories' => $categories,
             ]);
     }
 
@@ -37,7 +35,17 @@ class RecipeController extends Controller
     {
         $previous = session()->get('_previous');
 
-        $previous_page_url_number = substr($previous['url'], -1);
+        // 前に戻る」ボタン用のlistページのページャーの番号を取得
+        // 詳細ページでリロードした際は、
+        if (strpos($previous['url'], '/recipes/list'))
+        {
+            $previous_page_url_number = substr($previous['url'], -1);
+            session()->put('previous_page_url_number', $previous_page_url_number);
+
+        } elseif (strpos($previous['url'], '/recipes/show'))
+        {
+            $previous_page_url_number = session()->get('previous_page_url_number');
+        }
 
         $now_authenticated_user_id = Auth::user()->id;
 
@@ -45,7 +53,7 @@ class RecipeController extends Controller
         // レシピ作成者以外の人がそのレシピを閲覧した場合、viewカウント(目のマーク)を増やす
 
         if ($now_authenticated_user_id !== $recipe->user_id
-
+            && !strpos($previous['url'], '/recipes/show')
         )
         {
             Auth::user()->point = Auth::user()->point - config('recipe.options.consumption_point');
@@ -54,6 +62,7 @@ class RecipeController extends Controller
             $recipe->view = $recipe->view + 1;
             $recipe->save();
         }
+        logger($previous_page_url_number);
 
         return view('recipes.show')
             ->with([

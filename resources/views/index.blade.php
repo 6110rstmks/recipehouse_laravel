@@ -37,7 +37,6 @@
         <ul style="margin-top: 15px;">
             @foreach ($categories[0]->recipes as $recipe)
                 <li>
-                    <a class="underline" href="{{ route('recipes.show', $recipe) }}">{{ $recipe->name }}</a>
                     <form method="post" action="{{ route('recipes.destroy', $recipe) }}" class="delete-comment">
                         @method('DELETE')
                         @csrf
@@ -45,6 +44,8 @@
                             DELETE
                         </button>
                     </form>
+                    <a class="underline" href="{{ route('recipes.show', $recipe) }}">{{ $recipe->name }}</a>
+
                 </li>
             @endforeach
         </ul>

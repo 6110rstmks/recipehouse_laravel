@@ -28,7 +28,6 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        Log::info('ukon');
         $authenticated_user = Auth::user();
 
         $categories = $authenticated_user->categories->paginate(3);

@@ -11,10 +11,9 @@
 
     <a class="btn-b" href="{{route('user.home')}}">MY PAGE</a>
 
-    <a class="btn-b ml-3"
-        href="{{ route('recipes.list') }}">
-        All Recipe
-    </a>
+    <a class="btn-b ml-3" href="{{ route('recipes.list') }}">All Recipes</a>
+
+    <a href="" class="btn-b ml-3">My Recipes</a>
 
     <div class="container" style="margin-top: 12px;">
 
