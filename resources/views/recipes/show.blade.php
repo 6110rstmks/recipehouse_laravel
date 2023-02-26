@@ -26,22 +26,23 @@
             <img class="mt-6" width=380 src="{{ asset('storage/'. $recipe->file_path) }}">
         @endif
 
+        @if ($recipe->user_id === Auth::id())
+            <textarea autofocus placeholder="テキストは自動保存されます" name="" id="" cols="30" rows="10"></textarea>
 
+            <form action="{{route('tags.store', $recipe)}}" method="POST" class="flex">
+                @csrf
+                <input type="text" name="name" placeholder="add tag">
+                <button class="ml-3 cursor-pointer border w-4">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </form>
 
-        @auth
-        <form action="{{route('tags.store', $recipe)}}" method="POST" class="flex">
-            @csrf
-            <input type="text" name="name" placeholder="add tag">
-            <button class="ml-3 cursor-pointer border w-4">
-                <i class="fa fa-plus"></i>
-            </button>
-        </form>
-        @endauth
+        @endif
 
         {{-- 一覧ページから来た場合 --}}
         {{-- show(),showList()を参照 --}}
         @if (isset($previous_page_url_number))
-            <a href="{{route('recipes.list', ['page' => $previous_page_url_number])}}" class="btn-blue" onclick="history.back()">前に戻る</a>
+            <a href="{{route('recipes.list', ['page' => $previous_page_url_number])}}" class="btn-blue" onclick="history.back()">Back To All Recipes</a>
         @else
         {{-- レシピハウスから詳細レシピページに入った場合 --}}
             <a href="{{route('categories.index')}}" class="btn-blue">Back To Recipehouse</a>

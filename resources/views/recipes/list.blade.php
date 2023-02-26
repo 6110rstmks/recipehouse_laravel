@@ -3,8 +3,8 @@
         <div id="nowuserid" data-nowuserid={{Auth::user()->id}} class="mt-4 ml-4">
     @else
         <div id="nowuserid" class="mt-4 ml-4">
-
     @endif
+
 
         <h1 class="text-3xl">Recipe List</h1>
 
@@ -48,9 +48,6 @@
             @endforeach
         </table>
 
-        {{-- @if($errors->any())
-            <h4>{{$errors->first()}}</h4>
-        @endif --}}
 
         @if ($errors->any())
 

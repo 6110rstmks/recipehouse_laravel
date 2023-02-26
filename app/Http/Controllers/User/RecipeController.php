@@ -7,6 +7,7 @@ use App\Http\Requests\RecipeRequest;
 
 use App\Models\Category;
 use App\Models\Recipe;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Log;
 use illuminate\Support\Facades\Auth;
 
@@ -26,6 +27,8 @@ class RecipeController extends Controller
 
     public function show(Recipe $recipe)
     {
+        // Tag::where()
+        // タグとユーザを紐付けて、あるユーザが登録したタグを全取得する。
 
         return view('recipes.show')
             ->with(['recipe' => $recipe]);

@@ -38,5 +38,7 @@ reset-mail for forgetting-password
 
 カテゴリ変更機能
 
+## パスワードの再設定
+
 
 
