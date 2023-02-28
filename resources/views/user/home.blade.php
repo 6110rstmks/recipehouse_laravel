@@ -30,13 +30,7 @@
             </div>
         </div>
 
-        <span id="purge-category"
-            {{-- class="bg-transparent hover:bg-blue-500
-            text-blue-700 font-semibold hover:text-white
-            py-2 px-4 border border-blue-500 hover:border-transparent rounded"> --}}
-            class="btn-d">
-            purge
-        </span>
+        <span id="purge-category" class="btn-d">タグ管理</span>
 
         <button class="inline-flex items-center h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">
             <a href="{{ route('register_form') }}">New Sign Up</a>

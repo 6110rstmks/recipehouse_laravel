@@ -8,7 +8,7 @@
     {{-- elseif thre is no categories, right screen display nothing. --}}
     @if($categories->count() != 0)
         <span class="icon">
-            <i class="fas fa-utensils fa-lg"></i>
+           <i class="fas fa-utensils fa-lg"></i>
         </span>
         {{-- 左画面においてカテゴリが選択されていないとき、右画面のデフォルトカテゴリは登録カテゴリのうちidの一番大きいものを表示 --}}
         <span style="font-size: 20px; margin-left: 10px;">{{ $categories[0]->title }}</span>
@@ -28,13 +28,13 @@
                 focus:ring-purple-300 font-medium rounded-full text-sm
                 px-3 py-1 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700
                 dark:focus:ring-purple-900">
-                UPLOAD
+                Create Recipe
             </button>
         </form>
 
         <hr>
 
-        <ul style="margin-top: 15px;">
+        <ul class="mt-2">
             @foreach ($categories[0]->recipes as $recipe)
                 <li>
                     <form method="post" action="{{ route('recipes.destroy', $recipe) }}" class="delete-comment">
@@ -44,6 +44,9 @@
                             Delete
                         </button>
                     </form>
+                    <a href="{{route('recipes.edit_page', $recipe)}}" class="text-[12px] inline-flex btn btn-blue">
+                        Edit
+                    </a>
                     <a class="underline" href="{{ route('recipes.show', $recipe) }}">{{ $recipe->name }}</a>
 
                 </li>

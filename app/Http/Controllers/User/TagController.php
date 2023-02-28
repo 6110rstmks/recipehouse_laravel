@@ -9,7 +9,22 @@ use App\Models\Recipe;
 
 class TagController extends Controller
 {
-    public function store(Request $request, Recipe $recipe)
+
+    public function showTag(Request $request)
+    {
+        $search_word = '%' . $request->keyword . '%';
+
+        if ($request->keyword != '')
+        {
+            $tag_names = Tag::where("name", 'Like', $request->keyword)->get();
+        }
+
+        return response()->json([
+            'tag_names' => $tag_names,
+        ]);
+    }
+
+    public function attach(Request $request, Recipe $recipe)
     {
         $request->validate([
             'name' => 'unique:tags'
@@ -25,6 +40,10 @@ class TagController extends Controller
 
         return redirect()->route('recipes.show', $recipe);
 
+    }
+
+    public function detach(Recipe $recipe, Tag $tag)
+    {
 
     }
 }

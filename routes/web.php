@@ -117,6 +117,11 @@ Route::group([
         ->name('recipes.show')
         ->where('recipe', '[0-9]+');
 
+    // recipe edit page
+    Route::get('/recipes/edit/{recipe}', [RecipeController::class, 'editPage'])        ->name('recipes.edit_page')
+        ->where('recipe', '[0-9]+');
+
+
 
     // categoryに紐付けたrecipeを追加
     Route::post('/store/{category}recipes', [RecipeController::class, 'store'])

@@ -20,32 +20,38 @@
             <div class="error">{{ $message }}</div>
         @enderror
 
-        <p><input type="file" name="image"></p>
+        <p class="mt-5"><input type="file" name="image"></p>
         <button class="mt-3 text-white bg-purple-700
             hover:bg-purple-800 focus:outline-none focus:ring-4
             focus:ring-purple-300 font-medium rounded-full text-sm
             px-3 py-1 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700
             dark:focus:ring-purple-900">
-            UPLOAD
+            Create Recipe
         </button>
     </form>
     <hr>
 
-    <ul>
+    <ul class="mt-2">
         @foreach ($category->recipes as $recipe)
             <li>
                 <form method="post" action="{{ route('recipes.destroy', $recipe) }}" class="delete-comment">
                     @method('DELETE')
                     @csrf
-                    <button class="mt-5 bg-blue-500
-                        hover:bg-blue-700 text-black
-                        py-1 px-2 rounded-full">
-                        DELETE
+
+                    <button class="text-[12px] inline-flex btn btn-blue">
+                        Delete
                     </button>
                 </form>
+                <button class="text-[12px] inline-flex btn btn-blue">
+                    Edit
+                </button>
                 <a href="{{ route('recipes.show', $recipe) }}">{{ $recipe->name }}</a>
 
             </li>
         @endforeach
     </ul>
+
+    <div>
+        {{-- {{$category->recipes()->first()->value('name')}} --}}
+    </div>
 </x-recipehouse>

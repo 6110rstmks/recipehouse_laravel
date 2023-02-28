@@ -36,7 +36,7 @@
                 </form>
 
                 @error('title')
-                    <div class="text-red-900">{{ $message }}</div>
+                    <div class="text-xl text-red-400 font-bold">{{ $message }}</div>
                 @enderror
 
             </div>

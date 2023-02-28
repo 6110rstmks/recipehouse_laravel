@@ -27,11 +27,11 @@ class RecipeController extends Controller
 
     public function show(Recipe $recipe)
     {
-        // Tag::where()
-        // タグとユーザを紐付けて、あるユーザが登録したタグを全取得する。
 
         return view('recipes.show')
-            ->with(['recipe' => $recipe]);
+            ->with([
+                'recipe' => $recipe,
+            ]);
     }
 
     public function showFromList(Recipe $recipe)
@@ -70,7 +70,7 @@ class RecipeController extends Controller
         return view('recipes.show')
             ->with([
                 'recipe' => $recipe,
-                'previous_page_url_number' => $previous_page_url_number
+                'previous_page_url_number' => $previous_page_url_number,
             ]);
 
     }
@@ -120,6 +120,16 @@ class RecipeController extends Controller
 
         return redirect()
             ->route('recipes.show', $recipe);
+    }
+
+    public function editPage(Recipe $recipe)
+    {
+        return view('recipes.edit')->with(['recipe' => $recipe]);
+    }
+
+    public function edit(Request $request)
+    {
+
     }
 
     /**

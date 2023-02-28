@@ -15,7 +15,7 @@
         {{-- bg-inheritでテキストフォームのbackground-colorを同化させている --}}
         <input class="text-red-400 bg-inherit cursor-text title-update" type="text"
             value="{{ $category->title}}" name="updateTitle"
-            onfocus="this.select();" data-id="{{ $category->id }}">
+            onfocus="this.select();" data-id="{{ $category->id }}" required>
 
         <form class="inline" action="{{ route('categories.destroy', $category)}}" method="POST">
             @csrf
