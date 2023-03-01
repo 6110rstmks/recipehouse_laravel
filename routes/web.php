@@ -118,13 +118,21 @@ Route::group([
         ->where('recipe', '[0-9]+');
 
     // recipe edit page
-    Route::get('/recipes/edit/{recipe}', [RecipeController::class, 'editPage'])        ->name('recipes.edit_page')
+    Route::get('/recipes/edit-page/{recipe}', [RecipeController::class, 'editPage'])
+        ->name('recipes.edit_page')
         ->where('recipe', '[0-9]+');
 
+    // recipe create page
+    Route::get('/recipes/create-page/{recipe}', [RecipeController::class, 'createPage'])
+        ->name('recipes.create_page')
+        ->where('recipe', '[0-9]+');
 
+    // categoryに紐付けたrecipeを追加(タイトル名のみ)
+    Route::post('/pre_store/{category}/recipes', [RecipeController::class, 'pre_store'])
+        ->name('recipes.pre_store')
+        ->where('category', '[0-9]+');
 
-    // categoryに紐付けたrecipeを追加
-    Route::post('/store/{category}recipes', [RecipeController::class, 'store'])
+    Route::post('/store/{recipes}', [RecipeController::class, 'store'])
         ->name('recipes.store')
         ->where('category', '[0-9]+');
 

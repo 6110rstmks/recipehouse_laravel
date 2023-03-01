@@ -78,7 +78,7 @@ class RecipeController extends Controller
     /**
      * save a recipe and sync it with a post
      */
-    public function store(RecipeRequest $request, Category $category)
+    public function pre_store(RecipeRequest $request, Category $category)
     {
         // countermeasure for multiple submission
 
@@ -92,7 +92,20 @@ class RecipeController extends Controller
 
         $recipe->name = $request->name;
 
+        $recipe->user_id = Auth::user()->id;
+        $recipe->save();
 
+        // https://laravel.com/docs/9.x/eloquent-relationships#inserting-and-updating-related-models
+        // 変わりにこれを使うのもよさげ
+
+        $category->recipes()->syncWithoutDetaching($recipe->id);
+
+        return redirect()
+            ->route('recipes.create_page', $recipe);
+    }
+
+    public function store(Request $request, Recipe $recipe)
+    {
         if ($request->has('image'))
         {
             // アップロードされたファイル名を取得
@@ -108,28 +121,46 @@ class RecipeController extends Controller
 
         $recipe->body = $request->body;
 
-        $recipe->user_id = Auth::user()->id;
-
-
         $recipe->save();
 
-        // https://laravel.com/docs/9.x/eloquent-relationships#inserting-and-updating-related-models
-        // 変わりにこれを使うのもよさげ
+        $categories = $recipe->categories();
 
-        $category->recipes()->syncWithoutDetaching($recipe->id);
-
-        return redirect()
-            ->route('recipes.show', $recipe);
+        return redirect()->route('categories.show', $categories[0]);
     }
 
     public function editPage(Recipe $recipe)
     {
-        return view('recipes.edit')->with(['recipe' => $recipe]);
+        $route = "route('recipes.edit', \$recipe)";
+
+        // dd($route);
+
+        return view('recipes.edit')
+            ->with([
+                'recipe' => $recipe,
+                'route' => $route
+            ]);
+    }
+
+    public function createPage(Recipe $recipe)
+    {
+        $route = "route('recipes.create', \$recipe)";
+
+        return view('recipes.create')
+            ->with([
+                'recipe' => $recipe,
+                'route' => $route
+            ]);
     }
 
     public function edit(Request $request)
     {
+        $recipe->body = $request->body;
 
+        $recipe->save();
+
+        $category = $recipe->categories[0];
+
+        return redirect()->route('categories.show', $category);
     }
 
     /**

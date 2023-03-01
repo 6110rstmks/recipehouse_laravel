@@ -13,7 +13,7 @@
         {{-- 左画面においてカテゴリが選択されていないとき、右画面のデフォルトカテゴリは登録カテゴリのうちidの一番大きいものを表示 --}}
         <span style="font-size: 20px; margin-left: 10px;">{{ $categories[0]->title }}</span>
 
-        <form method="post" action="{{ route('recipes.store', $categories[0]) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('recipes.pre_store', $categories[0]) }}" enctype="multipart/form-data">
             @csrf
             <p>add recipe</p>
             <p class="mt-6"><input type="text" name="name"></p>
@@ -28,7 +28,7 @@
                 focus:ring-purple-300 font-medium rounded-full text-sm
                 px-3 py-1 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700
                 dark:focus:ring-purple-900">
-                Create Recipe
+                Write Details of Recipe
             </button>
         </form>
 
@@ -47,7 +47,8 @@
                     <a href="{{route('recipes.edit_page', $recipe)}}" class="text-[12px] inline-flex btn btn-blue">
                         Edit
                     </a>
-                    <a class="underline" href="{{ route('recipes.show', $recipe) }}">{{ $recipe->name }}</a>
+                    {{-- <a class="underline" href="{{ route('recipes.show', $recipe) }}">{{ $recipe->name }}</a> --}}
+                    <a class="underline" href="{{ route('recipes.edit_page', $recipe) }}">{{ $recipe->name }}</a>
 
                 </li>
             @endforeach

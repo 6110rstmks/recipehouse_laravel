@@ -11,7 +11,7 @@
     </span>
     <span>{{ $category->title }}</span>
 
-    <form method="post" action="{{ route('recipes.store', $category) }}" class="task-form" enctype="multipart/form-data">
+    <form method="post" action="{{ route('recipes.pre_store', $category) }}" class="task-form" enctype="multipart/form-data">
         @csrf
         <p>add recipe</p>
         <input class="mt-6" type="text" name="name">
