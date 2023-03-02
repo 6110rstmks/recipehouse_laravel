@@ -45,13 +45,9 @@
                 <button class="text-[12px] inline-flex btn btn-blue">
                     Edit
                 </button>
-                <a href="{{ route('recipes.show', $recipe) }}">{{ $recipe->name }}</a>
+                <a href="{{ route('recipes.edit_page', $recipe) }}">{{ $recipe->name }}</a>
 
             </li>
         @endforeach
     </ul>
-
-    <div>
-        {{-- {{$category->recipes()->first()->value('name')}} --}}
-    </div>
 </x-recipehouse>

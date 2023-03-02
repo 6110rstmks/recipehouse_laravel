@@ -9,7 +9,7 @@
         {{-- <div class="title-container" style="margin-top: 30px">
             <span class="delete" style="margin-right: 10px" data-id="{{ $category->id }}">x</span>
         </div> --}}
-        <a class="block text-lg" href="{{ route('categories.show', $category) }}"><span class="text-sm">◀</span>Show Recipe▶</a>
+        <a class="block text-lg" href="{{ route('categories.show', $category) }}"><span class="text-sm">◀</span>Show Category▶</a>
 
         {{-- タイトルをajaxでupdateできる --}}
         {{-- bg-inheritでテキストフォームのbackground-colorを同化させている --}}

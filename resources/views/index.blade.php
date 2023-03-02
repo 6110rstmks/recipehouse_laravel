@@ -22,12 +22,7 @@
                 <div class="error">{{ $message }}</div>
             @enderror
 
-            <p class="mt-5"><input type="file" name="image"></p>
-            <button class="mt-3 text-white bg-purple-700
-                hover:bg-purple-800 focus:outline-none focus:ring-4
-                focus:ring-purple-300 font-medium rounded-full text-sm
-                px-3 py-1 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700
-                dark:focus:ring-purple-900">
+            <button class="mt-3 btn-c">
                 Write Details of Recipe
             </button>
         </form>

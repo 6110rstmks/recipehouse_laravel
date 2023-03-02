@@ -15,12 +15,19 @@ class RecipeForm extends Component
     public $recipe;
 
     public $route;
-    
-    public function __construct($recipe, $route)
+
+    public $state;
+
+    public function __construct($recipe = null, $route, $state)
     {
+        // if ($state === "edit")
+        // {
+        // }
         $this->recipe = $recipe;
 
         $this->route = $route;
+
+        $this->state = $state;
 
     }
 

@@ -101,11 +101,35 @@ class RecipeController extends Controller
         $category->recipes()->syncWithoutDetaching($recipe->id);
 
         return redirect()
-            ->route('recipes.create_page', $recipe);
+            // ->route('recipes.create_page', $recipe);
+            ->route('recipes.create_page');
+    }
+
+    public function createPage(Recipe $recipe)
+    // public function createPage()
+    {
+
+        $recipe = Recipe::latest()->first();
+
+
+        return view('recipes.create')
+            ->with([
+                // 'recipe' => null,
+                'recipe' => $recipe,
+                'state' => "create",
+            ]);
     }
 
     public function store(Request $request, Recipe $recipe)
+    // public function store(Request $request)
     {
+        $request->validate([
+            'body' => 'required',
+        ]);
+
+        $recipe = Recipe::latest()->first();
+
+
         if ($request->has('image'))
         {
             // アップロードされたファイル名を取得
@@ -123,37 +147,32 @@ class RecipeController extends Controller
 
         $recipe->save();
 
-        $categories = $recipe->categories();
+        $category = $recipe->categories[0];
 
-        return redirect()->route('categories.show', $categories[0]);
+        return redirect()->route('categories.show', $category);
+    }
+
+    public function discard()
+    {
+
     }
 
     public function editPage(Recipe $recipe)
     {
-        $route = "route('recipes.edit', \$recipe)";
-
-        // dd($route);
 
         return view('recipes.edit')
             ->with([
                 'recipe' => $recipe,
-                'route' => $route
+                'state' => "edit",
             ]);
     }
 
-    public function createPage(Recipe $recipe)
+    public function edit(Recipe $recipe, Request $request)
     {
-        $route = "route('recipes.create', \$recipe)";
+        $request->validate([
+            'body' => 'required',
+        ]);
 
-        return view('recipes.create')
-            ->with([
-                'recipe' => $recipe,
-                'route' => $route
-            ]);
-    }
-
-    public function edit(Request $request)
-    {
         $recipe->body = $request->body;
 
         $recipe->save();
