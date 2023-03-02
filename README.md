@@ -4,8 +4,6 @@ I dared to configure db without foreign key constraint.
 
 table(category, recipe, user, tag)
 
-## functional requirement
-
 pagination
 
 レシピ一覧リストにおいて、ajaxのdeleteができる（☓ボタンが表示される）（自分が作成したレシピの場合）
@@ -38,7 +36,7 @@ reset-mail for forgetting-password
 
 ### その他
 
-カテゴリは各ユーザがレシピを整理するためのものなので、recipelistには表示しない
+カテゴリは各ユーザがレシピを整理するためのものなので、誰でも閲覧可能なrecipelistには表示しない
 
 ## レシピ詳細ページ
 
@@ -47,10 +45,12 @@ reset-mail for forgetting-password
 
 ### タグのレシピへの付加
 
+なにも文字を入力していない状態ではランダムに5レコードDBからとってくる。
+テキストボックスのクリック毎に取ってくるレコードがランダムに変化する。
 live searchで検索
+すでにアタッチされているタグ(recipe-tagのpivotテーブルにすでに登録されているレコードと同一のレコード)は付加しない
 
 ### タグをレシピから外す
-ajax
 
 ## recipehouse
 
@@ -70,3 +70,6 @@ ajax
 ## その他チェック項目
 lazy loading になっていないか。
 テストは書いているか。
+
+# administration
+

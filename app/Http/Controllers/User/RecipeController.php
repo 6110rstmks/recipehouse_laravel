@@ -106,15 +106,17 @@ class RecipeController extends Controller
     }
 
     public function createPage(Recipe $recipe)
-    // public function createPage()
     {
 
         $recipe = Recipe::latest()->first();
 
+        $tags = Tag::get()->take(5);
+
+        Log::debug($tags);
 
         return view('recipes.create')
             ->with([
-                // 'recipe' => null,
+                'tags' => $tags,
                 'recipe' => $recipe,
                 'state' => "create",
             ]);
@@ -160,8 +162,11 @@ class RecipeController extends Controller
     public function editPage(Recipe $recipe)
     {
 
+        $tags = Tag::select("*")->inRandomOrder()->take(5)->get();
+
         return view('recipes.edit')
             ->with([
+                'tags' => $tags,
                 'recipe' => $recipe,
                 'state' => "edit",
             ]);
@@ -182,9 +187,6 @@ class RecipeController extends Controller
         return redirect()->route('categories.show', $category);
     }
 
-    /**
-     *
-     */
     public function destroy(Recipe $recipe)
     {
 
@@ -204,7 +206,7 @@ class RecipeController extends Controller
     // trash page
     public function deletedList()
     {
-        $deleted_recipes = Recipe::onlyTrashed()->get();
+        $deleted_recipes = Recipe::onlyTrashed()->paginate(6);
 
         Log::info($deleted_recipes);
 

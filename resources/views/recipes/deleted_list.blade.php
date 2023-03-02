@@ -45,6 +45,9 @@
         </ul>
     </div>
 
+    {{ $deleted_recipes->links('pagination.default') }}
+
+
 
     <button class="mt-5 bg-lime-200 hover:bg-lime-700 text-black py-1 px-2 rounded-full">
         <a class="text-xs" href="{{route('user.home')}}">MY PAGE</a>

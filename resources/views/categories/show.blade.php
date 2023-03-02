@@ -42,9 +42,9 @@
                         Delete
                     </button>
                 </form>
-                <button class="text-[12px] inline-flex btn btn-blue">
+                <a href="{{route('recipes.edit_page', $recipe)}}" class="text-[12px] inline-flex btn btn-blue">
                     Edit
-                </button>
+                </a>
                 <a href="{{ route('recipes.edit_page', $recipe) }}">{{ $recipe->name }}</a>
 
             </li>

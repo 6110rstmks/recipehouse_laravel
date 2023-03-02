@@ -26,10 +26,6 @@ class TagController extends Controller
 
     public function attach(Request $request, Recipe $recipe)
     {
-        $request->validate([
-            'name' => 'unique:tags'
-        ]);
-
         $tag = new Tag();
 
         $tag->name = $request->name;
