@@ -11,7 +11,6 @@ class Recipe extends Model
     use HasFactory;
     use softDeletes;
 
-
     protected $fillable = [
         'name',
         'body',

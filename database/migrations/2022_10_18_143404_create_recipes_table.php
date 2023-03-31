@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('body')->nullable();
             $table->integer('user_id')->unsigned();
-            $table->integer('tag_id')->unsigned()->nullable();
             $table->string('file_path')->nullable();
             $table->string('expiration')->nullable()->comment('trash_expiration_date');
             $table->integer('view')->default(0)->comment('counting page view');

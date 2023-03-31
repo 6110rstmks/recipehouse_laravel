@@ -6,12 +6,21 @@
 
         <div class="pt-2 text-[13px]">
             <div class="p-1">
-                <input id="tag_select" class="w-16 px-1 py-1
+                @if ($state === "create")
+
+                    <input id="tag_select" class="w-16 px-1 py-1
+                        border-2 border-white rounded-md shadow
+                        focus:outline-none focus:border-blue-600"
+                        type="text" onfocus="focusDropdownOptions()"
+                        placeholder="Select an Tag">
+                @elseif ($state === "edit")
+                    <input id="tag_select" class="w-16 px-1 py-1
                     border-2 border-white rounded-md shadow
                     focus:outline-none focus:border-blue-600"
                     type="text" onfocus="focusDropdownOptions()"
-                    {{-- onblur="blurDropdownOptions()" --}}
+                    {{-- value="{{$attachedtags->name}}" --}}
                     placeholder="Select an Tag">
+                @endif
                 <div id="options" class="hidden w-16 py-1 bg-white rounded-lg shadow-xl">
                     @foreach ($tags as $tag)
                         <div href="#" data-id="{{$tag->id}}" class="block px-1 py-1 text-gray-800 hover:bg-indigo-500 hover:text-white">{{$tag->name}}</div>
@@ -55,7 +64,7 @@
     @if ($state === "edit")
         <a href="{{route('categories.show', $recipe->categories[0])}}" class="btn-b">Back</a>
     @elseif ($state === "create")
-        <a href="" class="btn-b">破棄する</a>
+        <a href="{{route('recipes.discard', $recipe->categories[0])}}" class="btn-b">破棄する</a>
     @endif
 
 </section>

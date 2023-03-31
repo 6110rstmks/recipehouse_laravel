@@ -34,17 +34,28 @@ class RecipeController extends Controller
             ]);
     }
 
-    public function showFromList(Recipe $recipe)
-    {
+    // recipelistから詳細ページに入った場合
+    public function showFromList(Recipe $recipe) {
         $previous = session()->get('_previous');
 
-        // 前に戻る」ボタン用のlistページのページャーの番号を取得
-        // 詳細ページでリロードした際は、
+        Log::info($previous);
+
         if (strpos($previous['url'], '/recipes/list'))
         {
-            $previous_page_url_number = substr($previous['url'], -1);
-            session()->put('previous_page_url_number', $previous_page_url_number);
+            if (is_numeric(substr($previous['url'], -1))) {
 
+                /**
+                 * 「前に戻る」ボタンを押したときに、リストページのページャー番号のページに戻るための変数
+                 *  @int
+                 */
+                $previous_page_url_number = substr($previous['url'], -1);
+
+            } else {
+                $previous_page_url_number = 1;
+            }
+
+            session()->put('previous_page_url_number', $previous_page_url_number);
+            logger($previous_page_url_number);
         } elseif (strpos($previous['url'], '/recipes/show'))
         {
             $previous_page_url_number = session()->get('previous_page_url_number');
@@ -65,14 +76,11 @@ class RecipeController extends Controller
             $recipe->view = $recipe->view + 1;
             $recipe->save();
         }
-        logger($previous_page_url_number);
-
         return view('recipes.show')
             ->with([
                 'recipe' => $recipe,
                 'previous_page_url_number' => $previous_page_url_number,
             ]);
-
     }
 
     /**
@@ -122,8 +130,16 @@ class RecipeController extends Controller
             ]);
     }
 
+    // 作成途中のレシピを破棄
+    public function discard(Category $category)
+    {
+        $maxid = Recipe::max('id');
+
+        Recipe::find($maxid)->delete();
+
+        return redirect()->route('categories.show', $category);
+    }
     public function store(Request $request, Recipe $recipe)
-    // public function store(Request $request)
     {
         $request->validate([
             'body' => 'required',
@@ -146,6 +162,10 @@ class RecipeController extends Controller
 
         $recipe->body = $request->body;
 
+        // $recipe->tag_id = $request->tag_id;
+        $recipe->tags()->syncWithoutDetaching($request->tag_id);
+
+
         $recipe->save();
 
         $category = $recipe->categories[0];
@@ -153,21 +173,19 @@ class RecipeController extends Controller
         return redirect()->route('categories.show', $category);
     }
 
-    // 作成途中のレシピを破棄
-    public function discard()
-    {
-
-    }
-
     public function editPage(Recipe $recipe)
     {
 
         $tags = Tag::select("*")->inRandomOrder()->take(5)->get();
 
+        $attachedtags = $recipe->tags[0];
+        // dd($attachedtags->name);
+
         return view('recipes.edit')
             ->with([
                 'tags' => $tags,
                 'recipe' => $recipe,
+                'outlet' => $attachedtags,
                 'state' => "edit",
             ]);
     }

@@ -124,6 +124,9 @@ Route::group([
     ->name('recipes.create_page')
     ->where('recipe', '[0-9]+');
 
+    // 草稿破棄
+    Route::get('/recipes/{category}/discard', [RecipeController::class, 'discard'])
+        ->name('recipes.discard');
     // recipe edit page
     Route::get('/recipes/edit-page/{recipe}', [RecipeController::class, 'editPage'])
         ->name('recipes.edit_page')

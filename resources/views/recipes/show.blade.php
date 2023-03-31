@@ -3,15 +3,17 @@
     <div class="mt-3 ml-3">
 
         {{-- 一覧ページから来た場合 --}}
-        {{-- show(),showList()を参照 --}}
+        {{-- recipeControllerのshow(),showFromList()を参照 --}}
         @if (isset($previous_page_url_number))
-            <a href="{{route('recipes.list', ['page' => $previous_page_url_number])}}" class="btn-blue" onclick="history.back()">Back To All Recipes</a>
+            <div>
+
+                <a href="{{route('recipes.list', ['page' => $previous_page_url_number])}}"
+                    class="btn-blue" onclick="history.back()">Back To All Recipes</a>
+            </div>
         @else
-        {{-- レシピハウスから詳細レシピページに入った場合 --}}
+        {{-- recipehouseから詳細レシピページに入った場合 --}}
             <a href="{{route('categories.index')}}" class="btn-blue">Back</a>
         @endif
-
-
 
         @guest
             <a class="btn-blue" href="{{ route('login_form') }}">Sign in from here</a>
@@ -20,7 +22,6 @@
         <h2 class="text-4xl inline">{{ $recipe->name }}</h2>
 
         <span class="inline">by {{$recipe->user->username}}</span>
-
 
         {{-- eye icon --}}
         <i class="fa fa-eye" style="font-size: 15px"></i><span>{{$recipe->view}}</span>

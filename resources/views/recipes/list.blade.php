@@ -43,6 +43,18 @@
                         by {{$recipe->user->username}}
                     @endif
                 </td>
+                <td>
+                    @if ($recipe->user_id === Auth::id())
+                    <form method="post" action="{{ route('recipes.destroy', $recipe) }}" class="delete-comment">
+                        @method('DELETE')
+                        @csrf
+                        <button class="text-[12px] inline-flex btn btn-blue">
+                            Delete
+                        </button>
+                    </form>
+
+                    @endif
+                </td>
             </tr>
 
             @endforeach
