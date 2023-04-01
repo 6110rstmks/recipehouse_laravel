@@ -17,7 +17,6 @@ class RecipeController extends Controller
     public function list()
     {
         $recipes = Recipe::paginate(5);
-
         return view('recipes.list')
             ->with([
                 'recipes' => $recipes,
@@ -63,19 +62,13 @@ class RecipeController extends Controller
 
         $now_authenticated_user_id = Auth::user()->id;
 
-        // consume points when viewing other's recipe
         // レシピ作成者以外の人がそのレシピを閲覧した場合、viewカウント(目のマーク)を増やす
 
         if ($now_authenticated_user_id !== $recipe->user_id
             && !strpos($previous['url'], '/recipes/show')
         )
         {
-            // ポイント消費はjsからリクエストを送って、別メソッドに記載。
-            // その理由は
-
-            // Auth::user()->point = Auth::user()->point - config('recipe.options.consumption_point');
-            // Auth::user()->save();
-
+            // ポイント消費はjsからリクエストを送る。
             $recipe->view = $recipe->view + 1;
             $recipe->save();
         }
@@ -85,10 +78,6 @@ class RecipeController extends Controller
                 'previous_page_url_number' => $previous_page_url_number,
             ]);
     }
-
-    // public function consumePoint() {
-
-    // }
 
     /**
      * save a recipe and sync it with a post
@@ -122,12 +111,8 @@ class RecipeController extends Controller
 
     public function createPage(Recipe $recipe)
     {
-
         $recipe = Recipe::latest()->first();
-
-        $tags = Tag::get()->take(5);
-
-        Log::debug($tags);
+        $tags = Tag::select("*")->inRandomOrder()->take(5)->get();
 
         return view('recipes.create')
             ->with([
@@ -141,9 +126,7 @@ class RecipeController extends Controller
     public function discard(Category $category)
     {
         $maxid = Recipe::max('id');
-
         Recipe::find($maxid)->delete();
-
         return redirect()->route('categories.show', $category);
     }
     public function store(Request $request, Recipe $recipe)
@@ -182,7 +165,6 @@ class RecipeController extends Controller
 
     public function editPage(Recipe $recipe)
     {
-
         $tags = Tag::select("*")->inRandomOrder()->take(5)->get();
 
         $attachedtags = $recipe->tags[0];
@@ -244,8 +226,6 @@ class RecipeController extends Controller
     {
         Log::info($recipeId);
         Recipe::withTrashed()->where('id', $recipeId)->restore();
-
-        // return redirect()->route('recipes.deletedList');
         return back();
     }
 }

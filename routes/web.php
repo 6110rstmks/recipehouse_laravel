@@ -12,8 +12,6 @@ use App\Http\Controllers\User\Auth;
 use App\Http\Controllers\Admin;
 
 
-
-
 // Auth process
 
 // ユーザ作成画面
@@ -136,6 +134,10 @@ Route::group([
     Route::post('/recipes/edit/{recipe}', [RecipeController::class, 'edit'])
         ->name('recipes.edit')
         ->where('recipe', '[0-9]+');
+
+        
+    Route::get('/set_newtag', [TagController::class, 'setNewTag']);
+        // ->name('')
 
     // categoryに紐付けたrecipeを追加(タイトル名のみ)
     Route::post('/pre_store/{category}/recipes', [RecipeController::class, 'pre_store'])

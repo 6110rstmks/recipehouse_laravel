@@ -20,12 +20,6 @@
                 // localStorageに、レシピの最後の閲覧時間を記録する
                 const lastViewedTime = localStorage.getItem(`recipe_${recipeId}_last_viewed`)
 
-                console.log(Date.now())
-
-                console.log(lastViewedTime)
-
-                console.log(Date.now() - lastViewedTime)
-
                 if (lastViewedTime) {
                     // すでに一度閲覧した場合は、現在の時間と比較して1分以内であればポイントを消費しない
                     if (Date.now() - lastViewedTime < 60000) {

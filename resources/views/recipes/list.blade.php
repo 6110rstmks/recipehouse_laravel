@@ -4,19 +4,17 @@
     @else
         <div id="nowuserid" class="mt-4 ml-4">
     @endif
-
-
         <h1 class="text-3xl">Recipe List</h1>
-
         @auth
             <span>Your point :{{Auth::user()->point}}</span>
+            <p>・ポイントを消費して他人のレシピを閲覧できる</p>
         @endauth
 
         <table class="border-collapse border border-slate-400">
             <tr>
                 <th class="border border-slate-300">ID</th>
                 <th class="border border-slate-300">Name</th>
-                <th class="border border-slate-300">Category</th>
+                {{-- <th class="border border-slate-300">Category</th> --}}
                 <th class="border border-slate-300">User</th>
             </tr>
             @foreach ($recipes as $recipe)
@@ -36,11 +34,11 @@
 
                 {{-- jsでポイント消費するけどいいです？のダイアログだしたいねんけどうまくいかん、ので保留 --}}
                 {{-- <td class="border border-slate-300"><a class="user_id" data-userid={{$recipe->user_id}}>{{$recipe->name}}</a></td> --}}
-                <td class="border border-slate-300">
+                {{-- <td class="border border-slate-300">
                     @foreach ($recipe->categories as $category)
                         {{$category->title}}
                     @endforeach
-                </td>
+                </td> --}}
                 <td class="border border-slate-300">
                     @if (is_null($recipe->user))
                         by 退会したユーザ

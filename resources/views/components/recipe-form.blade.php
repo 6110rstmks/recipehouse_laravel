@@ -23,7 +23,7 @@
                 @endif
                 <div id="options" class="hidden w-16 py-1 bg-white rounded-lg shadow-xl">
                     @foreach ($tags as $tag)
-                        <div href="#" data-id="{{$tag->id}}" class="block px-1 py-1 text-gray-800 hover:bg-indigo-500 hover:text-white">{{$tag->name}}</div>
+                        <div href="#" data-id="{{$tag->id}}" class="px-1 py-1 text-gray-800 hover:bg-indigo-500 hover:text-white">{{$tag->name}}</div>
                     @endforeach
                 </div>
             </div>

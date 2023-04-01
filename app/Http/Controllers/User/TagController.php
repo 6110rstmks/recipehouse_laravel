@@ -10,6 +10,15 @@ use App\Models\Recipe;
 class TagController extends Controller
 {
 
+    public function setNewTag()
+    {
+        $tags = Tag::select("*")->inRandomOrder()->take(5)->get();
+
+        return response()->json([
+            'tags' => $tags,
+        ]);
+    }
+
     public function showTag(Request $request)
     {
         $search_word = '%' . $request->keyword . '%';
