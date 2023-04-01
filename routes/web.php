@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin;
 
 
 
+
 // Auth process
 
 // ユーザ作成画面
@@ -163,6 +164,14 @@ Route::group([
         ->name('recipes.restore')
         ->where('recipeId', '[0-9]+');
 
+    // consume point
+    Route::post('/consume', function () {
+        illuminate\Support\Facades\Auth::user()->point = illuminate\Support\Facades\Auth::user()->point - config('recipe.options.consumption_point');
+        illuminate\Support\Facades\Auth::user()->save();
+        // logger(Auth::user()->point);
+        logger("3334p");
+    });
+
 
     // カテゴリ関連
     Route::group(['prefix' => 'categories', 'as' => 'categories.'], function() {
@@ -201,12 +210,12 @@ Route::group([
             ->where('category', '[0-9]+');
     });
 
-    Route::group(['prefix' => 'tags', 'as' => 'tags.'], function() {
-        Route::post('/store/{recipe}', [TagController::class, 'store'])
-            ->name('store')
-            ->where('recipe', '[0-9]+');
+    // Route::group(['prefix' => 'tags', 'as' => 'tags.'], function() {
+    //     Route::post('/store/{recipe}', [TagController::class, 'store'])
+    //         ->name('store')
+    //         ->where('recipe', '[0-9]+');
 
-    });
+    // });
 
 });
 

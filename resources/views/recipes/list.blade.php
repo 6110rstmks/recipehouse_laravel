@@ -14,7 +14,6 @@
 
         <table class="border-collapse border border-slate-400">
             <tr>
-
                 <th class="border border-slate-300">ID</th>
                 <th class="border border-slate-300">Name</th>
                 <th class="border border-slate-300">Category</th>
@@ -24,9 +23,15 @@
             <tr>
                 <td class="border border-slate-300">{{$recipe->id}}</td>
                 <td class="border border-slate-300">
-                    <a class="user_id" data-userid={{$recipe->user_id}}
-                        href="{{route('recipes.showFromList', $recipe)}}">{{$recipe->name}}
-                    </a>
+                    @auth
+                        <a class="user_id" data-userid={{$recipe->user_id}}
+                            data-recipeid={{$recipe->id}}
+                            href="{{route('recipes.showFromList', $recipe)}}">{{$recipe->name}}
+                        </a>
+                    @endauth
+                    @guest
+                        <div>{{$recipe->name}}</div>
+                    @endguest
                 </td>
 
                 {{-- jsでポイント消費するけどいいです？のダイアログだしたいねんけどうまくいかん、ので保留 --}}

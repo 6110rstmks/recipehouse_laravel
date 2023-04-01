@@ -70,8 +70,11 @@ class RecipeController extends Controller
             && !strpos($previous['url'], '/recipes/show')
         )
         {
-            Auth::user()->point = Auth::user()->point - config('recipe.options.consumption_point');
-            Auth::user()->save();
+            // ポイント消費はjsからリクエストを送って、別メソッドに記載。
+            // その理由は
+
+            // Auth::user()->point = Auth::user()->point - config('recipe.options.consumption_point');
+            // Auth::user()->save();
 
             $recipe->view = $recipe->view + 1;
             $recipe->save();
@@ -82,6 +85,10 @@ class RecipeController extends Controller
                 'previous_page_url_number' => $previous_page_url_number,
             ]);
     }
+
+    // public function consumePoint() {
+
+    // }
 
     /**
      * save a recipe and sync it with a post

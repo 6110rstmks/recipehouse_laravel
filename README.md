@@ -14,7 +14,8 @@ reset-mail for forgetting-password
 
 ## recipelist
 
-自分が作成したレシピの場合、ajaxのdeleteができる（☓ボタンが表示されている）（ajaxが未実装）
+・自分が作成したレシピの場合、ajaxのdeleteができる（☓ボタンが表示されている）（ajaxが未実装）
+・ゲストユーザが閲覧しようとすると、ログインを要求するアラートが表示される
 
 ### その他
 
@@ -32,6 +33,7 @@ reset-mail for forgetting-password
 
 ・消費ポイントはconfig/recipe.phpに記載
 ・ポイントを消費して閲覧したレシピは1時間以内ならポイントを使用せずに閲覧できる。（未実装）
+recipelist.js
 
 ### 足跡機能
 ・レシピ作成者ではない、あるユーザがレシピを閲覧するとカウントが1増える。
