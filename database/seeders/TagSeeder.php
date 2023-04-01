@@ -15,9 +15,11 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker\Factory::create();
+
         for ($i = 1; $i <= 10; $i++) {
             Tag::create([
-                'name' => $i,
+                'name' => 'タグ' . $,
             ]);
         }
     }

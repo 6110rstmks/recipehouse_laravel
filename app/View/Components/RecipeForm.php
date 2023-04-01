@@ -20,7 +20,9 @@ class RecipeForm extends Component
 
     public $tags;
 
-    public function __construct($recipe, $route, $state, $tags)
+    public $attachedtags;
+
+    public function __construct($recipe, $route, $state, $tags, $attachedtags)
     {
 
         $this->recipe = $recipe;
@@ -28,8 +30,10 @@ class RecipeForm extends Component
         $this->route = $route;
 
         $this->state = $state;
-        
+
         $this->tags = $tags;
+
+        $this->attachedtags = $attachedtags;
 
     }
 

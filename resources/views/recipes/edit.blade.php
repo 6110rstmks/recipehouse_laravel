@@ -3,8 +3,7 @@
     <x-recipe-form
         :recipe="$recipe"
         :tags="$tags"
-        {{-- :attachedtags="$attachedtags" --}}
-        :outlet="$outlet"
+        :attachedtags="$attachedtags"
         :route="route('recipes.edit', $recipe)"
         :state="$state"/>
 

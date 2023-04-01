@@ -167,14 +167,18 @@ class RecipeController extends Controller
     {
         $tags = Tag::select("*")->inRandomOrder()->take(5)->get();
 
-        $attachedtags = $recipe->tags[0];
-        // dd($attachedtags->name);
+        if (empty($recipe->tags)) {
+            Log::debug($recipe->tags);
+            $attachedtags = $recipe->tags[0];
+        } else {
+            $attachedtags = 'oiu';
+        }
 
         return view('recipes.edit')
             ->with([
                 'tags' => $tags,
                 'recipe' => $recipe,
-                'outlet' => $attachedtags,
+                'attachedtags' => $attachedtags,
                 'state' => "edit",
             ]);
     }

@@ -4,6 +4,8 @@
 
         <h2 class="text-2xl">{{$recipe->name }}</h2>
 
+        {{-- {{dd($attachedtags)}}; --}}
+
         <div class="pt-2 text-[13px]">
             <div class="p-1">
                 @if ($state === "create")

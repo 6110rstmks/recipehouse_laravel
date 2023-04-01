@@ -5,40 +5,30 @@
     }
 
     function setNewTag() {
-        fetch('/set_newtag', {
+        return fetch('/set_newtag', {
             method: 'GET'
-        })
-        .then(response => {
-            return response.json()
-        })
-        .then(json => {
-            while (tagOption.firstChild) {
-                tagOption.removeChild(document.querySelector('#options').firstChild)
-            }
-
-            const newtags = json.tags
-            newtags.forEach(newtag => {
-                console.log(newtag)
-                const divTag = document.createElement("div")
-                divTag.textContent = newtag.name
-                divTag.setAttribute("data-id", newtag.id)
-                divTag.classList.add("px-1", "py-1", "text-gray-800", "hover:bg-indigo-500", "hover:text-white")
-                tagOption.append(divTag)
-            })
-
         })
     }
 
     // get tag id by clicking tagname
-    let tagNames = document.querySelectorAll('#options div')
-    tagNames.forEach(tag_div => {
-        tag_div.addEventListener('click', () => {
+    let tag_divs = document.querySelectorAll('#options div')
+    tag_divs.forEach(tag_div => {
+        tag_div.addEventListener('click', async () => {
             let tagId = tag_div.dataset.id
             let tagName = tag_div.textContent
-            setNewTag()
-            document.querySelector('#tag_id_post').setAttribute('value', tagId)
             document.getElementById("tag_select").setAttribute('value', tagName)
 
+            let response = await setNewTag()
+            let newtags = (await response.json()).tags
+            const tagNamesArray = newtags.map(item => item.name)
+            const tagIdsArray = newtags.map(item => item.id)
+
+            // 新たに取得したタグで総入れ替え
+            for (let i = 0; i < tag_divs.length; i++) {
+                tag_divs[i].textContent = tagNamesArray[i];
+                tag_divs[i].dataset.id = tagIdsArray[i];
+            }
+            document.querySelector('#tag_id_post').setAttribute('value', tagId)
         })
     })
 
