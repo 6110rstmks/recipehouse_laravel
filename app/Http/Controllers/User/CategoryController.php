@@ -16,9 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         $authenticated_user = Auth::user();
-
         $categories = $authenticated_user->categories->paginate(3);
-
         return view('index')
             ->with(['categories' => $categories]);
     }
@@ -42,6 +40,15 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $auth_user = Auth::user();
+
+
+        $isDuplicate = $auth_user->categories()
+                        ->where('title', $request->title)
+                        ->exists();
+
+        if ($isDuplicate) {
+            return redirect()->back()->withErrors(['title' => 'the title is already created']);
+        }
 
         $category = new Category();
 

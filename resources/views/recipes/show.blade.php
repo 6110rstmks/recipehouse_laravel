@@ -1,12 +1,9 @@
 <x-layout>
-
     <div class="mt-3 ml-3">
-
         {{-- 一覧ページから来た場合 --}}
         {{-- recipeControllerのshow(),showFromList()を参照 --}}
         @if (isset($previous_page_url_number))
             <div>
-
                 <a href="{{route('recipes.list', ['page' => $previous_page_url_number])}}"
                     class="btn-blue" onclick="history.back()">Back To All Recipes</a>
             </div>
@@ -21,12 +18,14 @@
 
         <h2 class="text-4xl inline">{{ $recipe->name }}</h2>
 
-        <span class="inline">by {{$recipe->user->username}}</span>
+        <span class="inline">by <span class="text-blue-900">{{$recipe->user->username}}</span></span>
+
+        @if ($recipe->user_id !== Auth::id())
+            <button class="btn-c">このレシピをカテゴリに追加</button>
+        @endif
 
         {{-- eye icon --}}
         <i class="fa fa-eye" style="font-size: 15px"></i><span>{{$recipe->view}}</span>
-
-
         <div>
             @foreach ($recipe->categories as $category)
                 <span>{{$category->title}}</span>
@@ -65,13 +64,8 @@
 
             {{-- Add registered tag --}}
             <option value="tags">
-
             </option>
-
         @endif
-
-
     </div>
-
 </x-layout>
 
