@@ -1,39 +1,3 @@
-.left-container {
-    border-top: 1px solid;
-    width: 40%;
-    font-size: 22px;
-    padding-bottom: 8px;
-    align-items: center;
-}
-
-.category-box {
-    margin-top: 30px;
-    border-top: 1px solid #000;
-    padding-top: 10px;
-}
-
-.right-container {
-    margin-left: 120px;
-
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-
-.purge-category {
-    border-style: double;
-    cursor: pointer;
-    border-radius: 11px;
-}
-
-.big-chara {
-    font-weight: 800px;
-    font-size: 27px;
-}
-
 
 h1 > a {
     font-size: 16px;
@@ -47,33 +11,19 @@ li {
     margin-bottom: 8px;
 }
 
-.desc-area {
-    height: 80px;
-    width: 440px;
-}
-
 .error {
     color: red;
 }
 
-.title-container {
-    display: flex;
-}
-
-.title-container > a {
-    margin-right: 80px;
-}
-
-
-textarea {
+/* textarea {
     padding: 4px;
     width: 100%;
     box-sizing: border-box;
-}
+} */
 
-textarea {
+/* textarea {
     height: 160px;
-}
+} */
 
 
 .form-group {
@@ -82,43 +32,6 @@ textarea {
 
 .form-button {
     text-align: right;
-}
-
-.done {
-    background:
-    linear-gradient(to top left,
-        rgba(0,0,0,0) 0%,
-        rgba(0,0,0,0) calc(50% - 0.8px),
-        rgba(0,0,0,1) 50%,
-        rgba(0,0,0,0) calc(50% + 0.8px),
-        rgba(0,0,0,0) 100%),
-    linear-gradient(to top right,
-        rgba(0,0,0,0) 0%,
-        rgba(0,0,0,0) calc(50% - 0.8px),
-        rgba(0,0,0,1) 50%,
-        rgba(0,0,0,0) calc(50% + 0.8px),
-        rgba(0,0,0,0) 100%);
-}
-
-
-
-
-.delete {
-    font-size: 18.55px;
-    font-weight: 900;
-    color: red;
-    cursor: pointer;
-}
-
-.change {
-    font-weight: 900;
-    color: #696969;
-    font-size: 18.5px;
-    cursor: pointer;
-}
-
-.delete-comment {
-    display: inline-block;
 }
 
 /*  pagination */
@@ -139,3 +52,44 @@ textarea {
 .page-click-button {
     color: gray;
 }
+
+#plus {
+    /* change this value to the desired width */
+    --width: 30px;
+    /* setting the background color */
+    background-color: black;
+    /* setting height and width with the value of css variable */
+    width: var(--width);
+    height: var(--width);
+    /* perfect circle */
+    border-radius: var(--width);
+    /* centrering */
+    display: grid;
+    place-items: center;
+    /* don't delete this, is important for the ::before and ::after pseudoelements */
+    position: relative;
+  }
+
+
+  #plus::before,
+  #plus::after {
+    content: "";
+    /* using css calc() https://developer.mozilla.org/en-US/docs/Web/CSS/calc */
+    /* height and width relative to css variable, change to what you feel is good */
+    height: calc(var(--width) / 1.5);
+    width: calc(var(--width) / 5);
+    /* coloring the pseudoelements */
+    background-color: white;
+    /* here the TRICK, using calc() we easily canculate the rotation, without hardcoding this value */
+    transform: rotate(calc(var(--i) * 90deg));
+    /* important don't delete */
+    position: absolute;
+  }
+
+  #plus::before {
+    --i: 1;
+  }
+
+  #plus::after {
+    --i: 2;
+  }

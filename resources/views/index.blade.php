@@ -16,7 +16,9 @@
         <form method="POST" action="{{ route('recipes.pre_store', $categories[0]) }}" enctype="multipart/form-data">
             @csrf
             <p>add recipe</p>
-            <p class="mt-6"><input type="text" name="name"></p>
+            <p class="mt-6">
+                <input type="text" name="name" class="border-solid border-gray-600" placeholder="entry recipe name">
+                </p>
 
             @error('name')
                 <div class="error">{{ $message }}</div>

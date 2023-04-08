@@ -17,7 +17,7 @@
 
     <div class="flex mt-12">
 
-        <div class="left-container">
+        <div id="left-container">
             <hr>
             <div class="form-box">
                 <h2 class="mt-2 ml-2">RECIPE HOUSE</h2>
@@ -40,14 +40,13 @@
                 @enderror
 
             </div>
-
             <div>
                 <hr>
                 {{ $left }}
             </div>
         </div>
 
-        <div class="right-container">
+        <div id="right-container" class="ml-20">
             {{ $slot }}
         </div>
     </div>
